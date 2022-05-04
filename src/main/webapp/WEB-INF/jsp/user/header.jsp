@@ -1,47 +1,71 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>JOJO</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>JOJO</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	
+	<style>
+	div {
+	}
+	</style>
+	
+	<script>
+	function logout() {
+		if(!confirm('로그아웃 하시겠습니까?')) return;
+		$.ajax({
+			url:'/logout',
+			method:'get',
+			dataType:'json',
+			cache:false,
+			success:function(res) {
+				alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
+				if (res.logoutok) {
+					location.href="/main";
+				}
+			},
+			error:function(xhr,status,err) {
+				alert('error:' + err);
+			} 
+		});
+		return false;
+	}
+	</script>
 </head>
 <body>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-	</script> 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-	</script> 
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-	</script>
-
-
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-<!-- 리스트 : 부트스트랩은 모바일 우선이라 화면이 작으면 아래로 쌓아서 내려온다 --> 
-	<!-- 제목 --> 
-	<a class="navbar-brand" href="#">JOJO</a>
-
-	<ul class="navbar-nav navbar-dark"> 
-		<li class="nav-item active"> 
-			<a class="nav-link" href="#">Board</a>
-		</li>  
-		<li class="nav-item dropdown"> 
-		<!-- 드롭다운 메뉴--> 
-			<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> User </a> 
-			<div class="dropdown-menu"> 
-				<a class="dropdown-item" href="#">Mypage</a> 
-				<a class="dropdown-item" href="#">Logout</a> 
-			</div> 
-		</li> 
-	</ul> 
-	<!-- Search --> 
-	<form class="form-inline" action=""> 
-		<!-- inline여야 간격이 없이 메뉴처럼 나온다--> 
-		<input class="form-control mr-sm-2" type="text" placeholder="Search"> 
-		<!-- form-control 입력창 꾸며주는 클래스 --> 
-		<button class="btn btn-success" type="submit">Search</button> 
-	</form> 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="/main">JOJO</a>
+	<div>
+		<ul	class="navbar-nav navbar-dark"> 
+				<c:if test="${user_id == null}">
+					<a class="nav-link" href="/login">WELCOME! 로그인</a>
+				</c:if>	
+				<c:if test="${user_id != null}">
+					<a class="nav-link">WELCOME, ${user_id}!</a>
+				</c:if>
+			<li class="nav-item active"> 
+				<a class="nav-link" href="/board/board_list/1">Board</a>
+			</li>
+	  
+			<li class="nav-item dropdown"> 
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown"> User </a> 
+				<div class="dropdown-menu"> 
+					<a class="dropdown-item" href="/user_info/${user_id}">My page</a> 
+					<a class="dropdown-item" href="javascript:logout();">Logout</a> 
+				</div> 
+			</li> 
+		</ul> 
+	</div>
 </nav>
+
+	<Script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <Script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <Script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  
 </body>
+</html>

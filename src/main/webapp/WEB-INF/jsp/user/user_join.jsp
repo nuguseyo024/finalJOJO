@@ -15,12 +15,13 @@
         .pbox{width: 120px; height: 50px; border: 1px solid #666; padding: 10px;}
         .necessary{font-size: small; color:red;}    
     button{background:#00C850; color:white; width: 450px; border: 1px solid #666; height:50px; font-size: x-large;}
-
+	
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
 	crossorigin="anonymous"></script>
 <script>
+
 	function join() { 
 		var serData = $('#join_form').serialize();
 		$.ajax({
@@ -42,19 +43,43 @@
 		});
 		return false;
 	}
+	
+	
+	// 아이디 중복 체크
+	function idChk() {
+		var user_id = $('#user_id').val();
+		$.ajax({
+			url:'/idChk',
+			type:'post',
+			data:{user_id:user_id},
+			success:function(cnt) {
+				if (cnt != 1) {  // cnt == 0 사용가능 아이디
+					alert('사용 가능한 아이디입니다.');
+				} else {  // cnt == 1 : 이미 존재하는 아이디
+					alert('이미 사용중인 아이디입니다.');
+					idck = 1;
+				}
+			}, 
+			error:function() {
+				alert('error');
+			}
+		});
+	}
+			
+	
 </script>
 </head>
 <body>
-   <form id="join_form" onsubmit="return join();">
+   <form id="join_form" onsubmit="return join();" name="join_form">
       <div>
       	<ul>
-      		<li><span>아이디</span><br><input type="text" id="user_id" name="user_id" class='box'></li>
+      		<li><span>아이디</span><br><input type="text" id="user_id" name="user_id" class='box'><button type="button" onclick="idChk();">중복확인</button>
      		<li><span>비밀번호</span><input type="password" id="user_pwd" name="user_pwd" class='box'></li>
      	    <li><span>이름</span><input type="text" id="user_name" name="user_name" class='box'></li>
    			<li><span>전화번호</span><input type="text" id="user_phone" name="user_phone" class='box'></li>
   			<li><span>이메일</span><input type="email" id="user_email" name="user_email" class='box'></li>
-			<li><span>성별</span><br>남성<input type="radio" id="user_sex" name="user_sex" value="1">
-            여성<input type="radio" id="user_sex" name="user_sex" value="2"></li>
+			<li><span>성별</span><br>남성<input type="radio" id="user_sex" name="user_sex" value="M">
+            여성<input type="radio" id="user_sex" name="user_sex" value="F"></li>
       		<li><span>생년월일</span><input type="date" id="user_birth" name="user_birth" required></li>
        </ul>
       </div>

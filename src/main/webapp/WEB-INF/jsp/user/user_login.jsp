@@ -40,7 +40,6 @@
 	            <h1>Log In</h1>
 	            <div class="ID">
 	                <input type="text" id="user_id" name="user_id" placeholder="ID" required><br>
-	                
 	            </div>
 	            <div class="password">
 	                <input type="password" id="user_pwd" name="user_pwd" placeholder="Password" required><br><br>

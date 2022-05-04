@@ -30,6 +30,7 @@
 <body>
 	<h3>가입 정보</h3>
 		<div>아이디 : ${user.user_id }</div>
+		<div><input type="hidden" id="user_pwd" name="user_pwd" value="${user.user_pwd }"></div>
 		<div>이름 : ${user.user_name }</div>
 		<div>전화번호 : ${user.user_phone }</div>
 		<div>이메일 : ${user.user_email }</div>

@@ -27,6 +27,14 @@
 		});
 		return false;
 	}
+	
+	// 비밀번호 수정 전 현재 비밀번호 확인 팝업
+	function moveToPopup() {
+		var url = "/user_chkpwd_popup/${user.user_id}";  // 팝업창으로 열고 싶은 페이지 URL
+		var name = "popuptest";  // 팝업창 이름
+		var option = "width = 600, height = 200"  // 팝업창 옵션
+		window.open(url, name, option);
+	}
 
 </script> 
 </head>
@@ -34,7 +42,7 @@
 	<h3>가입 정보 수정</h3>
 		<form id="user_edit" onsubmit="return user_edit();">
 			<div><label>아이디 ${user.user_id } <input type="hidden" id="user_id" name="user_id" value="${user.user_id }" readonly></label></div>
-			<div><label><input type="hidden" id="user_pwd" name="user_pwd" value="${user.user_pwd }" readonly></label></div>
+			<div>비밀번호 <input type="password" id="user_pwd" name="user_pwd" value="${user.user_pwd }"><button type="button" onclick="moveToPopup();">수정</button></div>
 			<div><label>이름 ${user.user_name } <input type="hidden" id="user_name" name="user_name" value="${user.user_name }" readonly></label></div>
 			<div><label>전화번호 <input type="text" id="user_phone" name="user_phone" value="${user.user_phone }" required></label></div>
 			<div><label>이메일 <input type="text" id="user_email" name="user_email" value="${user.user_email }" required></label></div>

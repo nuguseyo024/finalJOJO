@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.io.PrintWriter"%>
-
+<%@ include file="../user/header.jsp" %>
 <%
 	String b_user_id  = (String) session.getAttribute("b_user_id");
 	String user_id = null;
@@ -25,9 +25,7 @@
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>
 <style>
-td {
-	border: 1px dotted grey;
-}
+
 </style>
 <script>
 
@@ -70,58 +68,58 @@ function delReply(num){
 
 </script>
 </head>
+<br>
+<br>
 <body>
-	<div>
-		<table>
+	<div class="container">
+		<div class="row">
+		<table class="table table-striped" style="text-align: center; border:1px solid #dddddd">
+			<thead>
+				<tr>
+					<th colspan="3" style="background-color: #eeeeee; text-align: center;">게시판 글보기</th>						
+				</tr>
+			</thead>
 			<tbody>
 				<tr>
-					<td>제목</td>
-					<td>${board.board_title }</td>
-					<td>no. ${board.board_num }</td>
+					<td style="width: 20%;">제목</td>
+					<td colspan="2">no.${board.board_num} ${board.board_title}</td>
 				</tr>
 				<tr>
 					<td>작성자</td>
-					<td>${board.b_user_id }</td>
-					<td>${board.board_date }</td>
-					<td>조회수 ${board.board_hit }</td>
+					<td colspan="2">${board.b_user_id}</td>
+				</tr>
+				<tr>
+					<td>작성일자</td>
+					<td colspan="2">${board.board_date}</td>
 				</tr>
 				<tr>
 					<td>내용</td>
-					<td>${board.board_content }</td>
+					<td colspan="23" style="min-height: 200px; text-align: left;">${board.board_content }</td>
 				</tr>
 			</tbody>
 		</table>
-
-	</div>
-	<hr>
-
-	<!-- 로그인한 아이디와 글 작성자가 다른 경우 : 수정/삭제 버튼 안 보임   -->
-	<c:if test="${user_id ne board.b_user_id }">
-		<div>
-			<a href="history.back()">이전</a>
-		</div>
-	</c:if>
-	
 	<!-- 로그인한 아이디와 글 작성자가 같은 경우에만 수정/삭제 버튼 보임  -->
 	<c:if test="${user_id eq board.b_user_id }">
 		
-	<div>
-		<a href="/board/board_update/${board.board_num }">수정 </a>
-	</div>
-	<div>
-		<a href="javascript:del(${board.board_num })">삭제 </a>
-	</div>
-	<div>
-		<div>
-			<a href="history.back()">이전</a>
+		<a href="/board/board_update/${board.board_num}" class="btn btn-primary">수정</a>
+			<a href="javascript:del(${board.board_num })" class="btn btn-primary">삭제</a>
+			<a href="history.back()" class="btn btn-primary">이전</a>
+	</c:if>			
+	<!-- 로그인한 아이디와 글 작성자가 다른 경우 : 수정/삭제 버튼 안 보임   -->
+	<c:if test="${user_id ne board.b_user_id }">
+			<a href="history.back()" class="btn btn-primary">이전</a>
+	</c:if>
+	
 		</div>
 	</div>
-	</c:if>	
 
 
 
 
 	<!-- 댓글 출력 영역  -->
+	<br>
+	<div class="container">
+		<div class="row">
 	<c:forEach items="${replyList }" var="replyList">
 		<table>
 		<tr>
@@ -140,15 +138,18 @@ function delReply(num){
 		
 		</td>	
 		</tr>
-		</table>	
+		</table>
+			
 		<!--  <button type="button" id="updateReply" class="btn " onclick="javascript:updateReply(${replyList.reply_num})">수정</button> -->
 		
 	</c:forEach>
-	
+	</div></div>
 	<!-- 댓글 작성 영역  -->
 	<hr>
-	<div >
+
 		<form class="form form" method="post" action="/reply/write">
+		<div class="container">
+			<div class="row">
 			<input type="hidden" id="reply_num" name="reply_num" value="0"> 
 			<input type="hidden" id="r_board_num" name="r_board_num" value="${board.board_num}">
 			<input type="hidden" id="r_user_id" name="r_user_id" value="${user_id}"> 
@@ -157,8 +158,9 @@ function delReply(num){
 			<input type="text"   id="reply_content" name="reply_content" required
 				placeholder="댓글을 작성할 때에는 상대방을 배려하는 친절한 언어를 사용해주세요.">
 			<button type="submit">작성</button>
+	</div></div>
 		</form>
-	</div>
+
 
 
 </body>
