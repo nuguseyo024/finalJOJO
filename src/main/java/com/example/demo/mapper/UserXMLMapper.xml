@@ -23,7 +23,7 @@
 		parameterType="com.example.demo.vo.UserVO">
 		SELECT *
 		FROM TB_user
-		WHERE user_id = #{user_id} AND user_pwd = #{user_pwd} AND user_num = (select user_num where user_id = #{user_id})
+		WHERE user_id = #{user_id} AND user_pwd = #{user_pwd}
 	</select>
 	
 	<!-- 회원 정보-->
@@ -48,15 +48,34 @@
 		DELETE FROM TB_user
 		WHERE user_id = #{user_id}
 	</delete>
+	
+	<!-- 현재 비밀번호 확인(팝업창) 
+	<select id="userChkPwd" 
+		resultType="com.example.demo.vo.UserVO"
+		parameterType="String">
+		SELECT user_pwd FROM TB_user
+		WHERE user_id = #{user_id}
+	</select> -->
+	
 
-
-
-
-
-
-
-
-
+	<!-- 비밀번호 변경 페이지 -->
+	<select id="userChgPwd"
+		resultType="com.example.demo.vo.UserVO"
+		parameterType="String">
+		SELECT user_id, user_pwd FROM TB_user
+		WHERE user_id = #{user_id}
+	</select>
+	
+	
+	<!-- 비밀번호 변경 기능 -->
+	<update id="userChgPwdProcess"
+		parameterType="com.example.demo.vo.UserVO">
+		UPDATE TB_user
+		SET user_pwd = #{user_pwd}
+		WHERE user_id = #{user_id}
+	</update>
+	
+	
 
 
 

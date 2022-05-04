@@ -39,9 +39,10 @@ function updateAction(){
 </script>
 </head>
 <body>
+<form id="update_form">
 	<div class="container">
 		<div class="row">
- 			<form id="update_form">
+ 			
  				<table class="table table-striped" style="text-align:center; border:1px solid #dddddd">
  	
 		  			<input type="hidden"  id="board_num" name="board_num" value="${board.board_num} ">
@@ -56,19 +57,19 @@ function updateAction(){
 			  	<tbody>
 			  		<tr>
 		  				<td style="width:20%">제목</td>
-		  				<td colspan="3"><input type="text" id="board_title" name="board_title" value="${board.board_title }"></td>  
+		  				<td colspan="3"><input type="text" class="form-control" id="board_title" name="board_title" value="${board.board_title }"></td>  
 					</tr>
 					<tr>
 	  					<td>글내용</td>
-						<td colspan="3"><textarea id="board_content" name="board_content" rows="3">${board.board_content}</textarea></td>
+						<td colspan="3"><textarea id="board_content" name="board_content" class="form-control" rows="3">${board.board_content}</textarea></td>
 					</tr>		
 				</tbody>
 				</table>
 					<button type="button" onclick="updateAction();">수정  </button>
-					<a href="history.back()">취소 </a>
-			</form>
+					<button type="button" onclick="history.back();">취소 </button>
+			
 		</div>
 	</div>
-
+</form>
 </body>
 </html>

@@ -39,7 +39,6 @@ function del(num){
 		cache:false,
 		dataType:'json',
 		success:function(res){
-			alert(res.deleted ? '게시글이 삭제되었습니다 ':'삭제 실패 ');
 			location.href='/board/board_list/1';
 		},
 		error:function(xhr,status,error){
@@ -117,35 +116,33 @@ function delReply(num){
 
 
 	<!-- 댓글 출력 영역  -->
-	<br>
+<br>
 	<div class="container">
 		<div class="row">
-	<c:forEach items="${replyList }" var="replyList">
 		<table>
-		<tr>
-			<td>${replyList.r_user_id }</td>
-			<td>${replyList.reply_content }</td>
-			<td><small>${replyList.reply_date }</small></td>
-		<td>
-		
-		<c:if test="${user_id eq replyList.r_user_id }">
-		<div>
-			<button type="button" id="deleteReply"
-				onclick="javascript:delReply(${replyList.reply_num})"
-					data-reply_number="${replyList.reply_num}">삭제</button>
-			</div>
-		</c:if>	
-		
-		</td>	
-		</tr>
+		<c:forEach items="${replyList }" var="replyList">
+			<tr>
+				<td>${replyList.r_user_id }</td>
+				<td>${replyList.reply_content }</td>
+				<td><small>${replyList.reply_date }</small></td>
+				<td>	
+					<c:if test="${user_id eq replyList.r_user_id }">
+						<div>
+							<button type="button" id="deleteReply"
+								onclick="javascript:delReply(${replyList.reply_num})"
+									data-reply_number="${replyList.reply_num}">삭제</button>
+						</div>
+					</c:if>	
+				</td>	
+			</tr>
+		</c:forEach>
 		</table>
-			
-		<!--  <button type="button" id="updateReply" class="btn " onclick="javascript:updateReply(${replyList.reply_num})">수정</button> -->
-		
-	</c:forEach>
-	</div></div>
+		<hr>
+
+		</div>
+	</div>
 	<!-- 댓글 작성 영역  -->
-	<hr>
+<hr>
 
 		<form class="form form" method="post" action="/reply/write">
 		<div class="container">

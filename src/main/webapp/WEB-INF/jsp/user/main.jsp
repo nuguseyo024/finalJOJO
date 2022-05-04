@@ -26,6 +26,12 @@
 			});
 			return false;
 		}
+		
+		function search() {
+			var keyword = $('#keyword').val();
+			alert(keyword);
+			location.href = "/board/board_searchList/" + keyword;
+		}
 	  </script>
       <meta charset="UTF-8">
       <meta name="description" content="Free HTML template">
@@ -82,7 +88,7 @@
          <div class="row">
             <div class="col-md-7 offset-md-1 col-sm-12">
                <p class="pb-5 pt-5">
-               	몇개의 평점으로 내 취향의 영화를 찾아보세요!
+               	몇 개의 평점으로 내 취향의 영화를 찾아보세요!
                </p>
             </div>
          </div>
@@ -94,11 +100,14 @@
             <div class="row justify-content-md-center ">
                <div class="col-md-10 col-sm-12">
                   <div class="card-columns">
+                  
+                  
+          				<c:forEach var="movie" items="${movie }">        
                   <!--  이게 반복됨  -->
                      <div class="card card-hover h-100" >
                         <div class="card-body">
                            <a href="index.html">
-                              <img class="card-img-top" src="https://movie-phinf.pstatic.net/20220324_173/1648105241678ygLXq_JPEG/movie_image.jpg" alt="Card image cap">
+                              <img class="card-img-top" src="${movie.poster_url }" alt="Card image cap">
                               <div class="reveal h-100 p-2 d-flex ">
                                  <div class="w-100 align-self-center">
                                     <p>+</p>
@@ -107,102 +116,10 @@
                            </a>
                         </div>
                      </div>
-                     <div class="card card-hover h-100" >
-                        <div class="card-body">
-                           <a href="index.html">
-                              <img class="card-img-top" src="https://movie-phinf.pstatic.net/20220422_31/1650605733502pD8Hx_JPEG/movie_image.jpg" alt="Card image cap">
-                              <div class="reveal h-100 p-2 d-flex ">
-                                 <div class="w-100 align-self-center">
-                                    <p>+</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </div>
-                     <div class="card card-hover h-100">
-                        <div class="card-body">
-                           <a href="index.html">
-                              <img class="card-img-top" src="https://movie-phinf.pstatic.net/20220421_276/1650529687306f5m2H_JPEG/movie_image.jpg" alt="Card image cap">
-                              <div class="reveal h-100 p-2 d-flex ">
-                                 <div class="w-100 align-self-center">
-                                    <p>+</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </div>
-                     <div class="card card-hover h-100">
-                        <div class="card-body">
-                           <a href="index.html">
-                              <img class="card-img-top" src="https://movie-phinf.pstatic.net/20220429_150/1651196758429nQ4v4_JPEG/movie_image.jpg" alt="Card image cap">
-                              <div class="reveal h-100 p-2 d-flex ">
-                                 <div class="w-100 align-self-center">
-                                    <p>+</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </div>
-                     <div class="card card-hover h-100">
-                        <div class="card-body">
-                           <a href="index.html">
-                              <img class="card-img-top" src="https://movie-phinf.pstatic.net/20220420_103/1650438088876onuXT_JPEG/movie_image.jpg" alt="Card image cap">
-                              <div class="reveal h-100 p-2 d-flex ">
-                                 <div class="w-100 align-self-center">
-                                    <p>+</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </div>
-                     <div class="card card-hover h-100">
-                        <div class="card-body">
-                           <a href="index.html">
-                              <img class="card-img-top" src="https://movie-phinf.pstatic.net/20220420_22/16504370785559wHfw_JPEG/movie_image.jpg" alt="Card image cap">
-                              <div class="reveal h-100 p-2 d-flex ">
-                                 <div class="w-100 align-self-center">
-                                    <p>+</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </div>
-                     <div class="card card-hover h-100">
-                        <div class="card-body">
-                           <a href="index.html">
-                              <img class="card-img-top" src="https://movie-phinf.pstatic.net/20220422_222/16506049712319Ya0u_JPEG/movie_image.jpg" alt="Card image cap">
-                              <div class="reveal h-100 p-2 d-flex ">
-                                 <div class="w-100 align-self-center">
-                                    <p>+</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </div>
-                     <div class="card card-hover h-100">
-                        <div class="card-body">
-                           <a href="index.html">
-                              <img class="card-img-top" src="https://movie-phinf.pstatic.net/20220429_292/1651199097498ilRq6_JPEG/movie_image.jpg" alt="Card image cap">
-                              <div class="reveal h-100 p-2 d-flex ">
-                                 <div class="w-100 align-self-center">
-                                    <p>+</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </div>
-                     <div class="card card-hover h-100">
-                        <div class="card-body">
-                           <a href="index.html">
-                              <img class="card-img-top" src="https://movie-phinf.pstatic.net/20220405_124/1649123775503hSf5T_JPEG/movie_image.jpg" alt="Card image cap">
-                              <div class="reveal h-100 p-2 d-flex ">
-                                 <div class="w-100 align-self-center">
-                                    <p>+</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </div>
+                </c:forEach>     
+
+
+                 
                   </div>
                </div>
             </div>

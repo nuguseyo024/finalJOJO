@@ -33,7 +33,6 @@ public class UserSVC {
 		UserVO login = userDao.login(userVO);
 		if (login != null) {
 			session.setAttribute("user_id", userVO.getUser_id());
-			session.setAttribute("user_num", userVO.getUser_num());
 			return true;
 		} else {
 			return false;
@@ -60,4 +59,21 @@ public class UserSVC {
 	public boolean userOut(String user_id) {
 		return userDao.userOut(user_id);
 	}
+	
+//	// 현재 비밀번호 확인(팝업창)
+//	public UserVO userChkPwd(UserVO userVO) {
+//		return userDao.userChkPwd(userVO);
+//	}
+	
+	// 비밀번호 변경 페이지
+	public UserVO userChgPwd(String user_id) {
+		return userDao.userChgPwd(user_id);
+	}
+	
+	// 비밀번호 변경 기능
+	public boolean userChgPwdProcess(UserVO userVO) {
+		return userDao.userChgPwdProcess(userVO);
+	}
+	
+	
 }

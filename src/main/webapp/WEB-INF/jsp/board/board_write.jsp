@@ -25,9 +25,6 @@ if (session.getAttribute("user_id") != null) {
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 	crossorigin="anonymous"></script>
 <style>
-div {
-	border: 2px solid grey;
-}
 </style>
 <script>
 	function writeAction() {
@@ -53,9 +50,9 @@ div {
 <br>
 <br>
 <body>
+<form id="write_form">
 	<div class="container">
-		<div class="row">
-			<form id="write_form">
+		<div class="row">		
 				<input type="hidden" id="board_num" name="board_num" value="0">
 				<input type="hidden" id="board_date" name="board_date" value="now()">
 				<input type="hidden" id="board_hit" name="board_hit" value="1">
@@ -84,12 +81,12 @@ div {
 									name="board_content" maxlength="2048" style="height: 350px;"></textarea></td>
 						</tr>
 					</tbody>
-
 				</table>
-				<input type="submit" class="btn btn-primary pull-right" value="작성" />
+				<button type="button" onclick="writeAction();">작성 </button>
+						</div>
+				</div>
 			</form>
-		</div>
-	</div>
+
 
 
 

@@ -3,12 +3,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Log In</title>
+ <title>Log In</title>
         <meta charset="utf-8">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
 		crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="../resources/css/style.css">
+        <link rel="stylesheet" href="../resources/css/login.css">
         <script>
          
         function login() {

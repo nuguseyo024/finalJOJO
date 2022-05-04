@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,10 @@ public class UserDAO {
 	
 	@Autowired
 	private UserXMLMapper userMapper;
+	
+	@Autowired SqlSession sql;
+	
+	private static final String namespace = "com.example.demo.mapper.UserXMLMapper";
 	
 	// 회원가입
 	public int join(UserVO userVO) {
@@ -36,6 +41,22 @@ public class UserDAO {
 	public boolean userOut(String user_id) {
 		return userMapper.userOut(user_id);
 	}
+	
+//	// 현재 비밀번호 확인(팝업창)
+//	public UserVO userChkPwd(UserVO userVO) {
+//		return userMapper.userChkPwd(userVO);
+//	}
+	
+	// 비밀번호 변경 페이지
+	public UserVO userChgPwd(String user_id) {
+		return userMapper.userChgPwd(user_id);
+	}
+	
+	// 비밀번호 변경 기능
+	public boolean userChgPwdProcess(UserVO userVO) {
+		return userMapper.userChgPwdProcess(userVO);
+	}
+	
 	
 
 }

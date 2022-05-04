@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,10 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.example.demo.svc.MovieSvc;
 import com.example.demo.svc.UserSVC;
 import com.example.demo.vo.UserVO;
 
@@ -21,11 +22,9 @@ public class UserController {
 	
 	@Autowired
 	private UserSVC userSvc;
-	
-
 	@Autowired
-	private HttpSession session;
-	
+	private MovieSvc movieSvc;
+
 	// 로그인 화면
 	@GetMapping("/login")
     public String login() {
@@ -73,7 +72,7 @@ public class UserController {
 		return "/user/user_edit";
 	}
 	
-	// 회원 정보 수정 완료 페이지
+	// 회원 정보 수정 기능
 	@PostMapping("/user_update")
 	@ResponseBody
 	public String userUpdate(UserVO userVO) {
@@ -89,9 +88,42 @@ public class UserController {
 		return String.format("{\"userout\":%b}", userSvc.userOut(user_id));
 	}
 	
+	// 현재 비밀번호 확인(팝업창)
+	@GetMapping("/user_chkpwd_popup/{user_id}")
+	public String userChkpwdPopup(@PathVariable("user_id") String user_id, Model model) {
+		model.addAttribute("user", userSvc.userInfo(user_id));
+		return "/user/user_chkpwd_popup";
+	}
+	
+//	// 현재 비밀번호 확인(팝업창)_확인 버튼 클릭시
+//	@PostMapping("/user_chkpwd")
+//	@ResponseBody
+//	public String userChkPwd(UserVO userVO) {
+//		boolean chkpwdok = userSvc.userChkPwd(userVO);
+//		return ;
+//	}
+	
+	// 비밀번호 변경 페이지 
+	@GetMapping("/user_chgpwd/{user_id}")
+	public String userChgPwd(@PathVariable("user_id") String user_id, Model model) {
+		model.addAttribute("user", userSvc.userChgPwd(user_id));
+		return "/user/user_chgpwd";
+	}
+	
+	// 비밀번호 변경 기능
+	@PostMapping("/user_chgpwd_process")
+	@ResponseBody
+	public String userChgPwdProcess(UserVO userVO) {
+		boolean chgpwdok = userSvc.userChgPwdProcess(userVO);
+		return String.format("{\"chgpwdok\":%b}", chgpwdok);
+	}
+	
+	
+	
 	// 임시 메인
 	@GetMapping("/main")
-	public String main() {
+	public String main(Model model) {
+		model.addAttribute("movie", movieSvc.movie_list());
 		return "/user/main";
 	}
 	
