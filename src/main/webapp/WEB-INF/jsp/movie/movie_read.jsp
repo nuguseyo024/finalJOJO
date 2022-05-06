@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.io.PrintWriter"%>
-
+<%@ include file="../user/header.jsp"%>
 
 <%
 // 	String b_user_id  = (String) session.getAttribute("b_user_id");
@@ -19,36 +19,52 @@
 %>
 
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>board_read</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"
-	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-	crossorigin="anonymous"></script>
-<style>
-td {
-	border: 1px dotted grey;
-}
-</style>
-<script>
-	
-</script>
-</head>
-<body>
+<html lang="en" class="no-js">
+   <head>
+      <!-- Meta -->
+      <title>movie_list</title>
+      <script>
+		function logout() {
+			if(!confirm('로그아웃 하시겠습니까?')) return;
+			$.ajax({
+				url:'/logout',
+				method:'get',
+				dataType:'json',
+				cache:false,
+				success:function(res) {
+					alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
+					if (res.logoutok) {
+						location.href="/main";
+					}
+				},
+				error:function(xhr,status,err) {
+					alert('error:' + err);
+				} 
+			});
+			return false;
+		}
+		
+		function search() {
+			var keyword = $('#keyword').val();
+			alert(keyword);
+			location.href = "/movie/movie_searchList/" + keyword;
+		}
+	  </script>
+      <meta charset="UTF-8">
+      <meta name="description" content="Free HTML template">
+      <meta name="keywords" content="HTML, template, free">
+      <meta name="author" content="Nicola Tolin">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- Styles -->
+      <link href="../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+      <link href="../resources/vendor/animate/animate.css" rel="stylesheet" type="text/css"/>
+      <link href="../resources/css/style.css" rel="stylesheet" type="text/css"/>
+   </head>
+   <body>
+
+
 	<div>
-		<table>
-			<tbody>
-				<tr>
-					<td>title</td>
-					<td>img</td>
-				</tr>
-				<tr>
-					<td>${movie.title }</td>
-					<td> <p><img src="${movie.poster_url }"></p></td>
-				</tr>
-			</tbody>
-		</table>
+ 		<p><img src="${movie.poster_url }"></p>
 	</div>
 
 </body>

@@ -78,19 +78,27 @@
          </div>
       </div>
       <!-- End Navbar -->
+
+      
       <!-- Portfolio-Text -->
       <div class="container-fluid pb-5 portfolio-text">
          <div class="row">
             <div class="col-md-7 offset-md-1 col-sm-12">
                <h2>영화 추천 사이트에 오신 것을 환영합니다.
                </h2>
+
             </div>
          </div>
          <div class="row">
             <div class="col-md-7 offset-md-1 col-sm-12">
                <p class="pb-5 pt-5">
                	몇 개의 평점으로 내 취향의 영화를 찾아보세요!
+        <form id="search_form" method="get" action="/movie/movie_searchList">
+			<input type="text" id="keyword" name="keyword" placeholder="Search">
+			<button type="submit">search</button>
+		</form>
                </p>
+
             </div>
          </div>
       </div>
@@ -107,7 +115,7 @@
                   <!--  이게 반복됨  -->
                      <div class="card card-hover h-100" >
                         <div class="card-body">
-                           <a href="index.html">
+                           <a href="/movie/movie_read/${movie.code}">
                               <img class="card-img-top" src="${movie.poster_url }" alt="Card image cap">
                               <div class="reveal h-100 p-2 d-flex ">
                                  <div class="w-100 align-self-center">

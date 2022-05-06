@@ -26,5 +26,13 @@
 		SELECT * FROM TB_reply
 		WHERE reply_num = #{reply_num}
 	</select>
+	
+	<select id="selectCountReply" resultType="Integer"
+		parameterType="Integer">
+		SELECT COUNT(reply_num) FROM TB_reply
+		WHERE r_board_num = #{r_board_num}
+	</select>
+	
+	
 </mapper>
 	

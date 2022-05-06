@@ -30,13 +30,6 @@ public class BoardController {
 	@Autowired
 	private ReplySvc replySvc;
 
-	// ========================================= 메인 화면 view
-	// http://localhost:8080/board/board_main
-	@GetMapping("/board_main")
-	public String board() {
-		return "/board/board_main";
-	}
-
 	// ========================================= 글 작성 화면 view
 	// http://localhost:8080/board/write_view
 	@GetMapping("/write_view")
@@ -59,9 +52,15 @@ public class BoardController {
 	public String getListByPage(@PathVariable("pgNum") int pg, Model model) {
 		PageInfo<BoardVO> pgInfo = svc.board_getList_page(pg, 10);
 		model.addAttribute("pageInfo", pgInfo);
+		
 		return "/board/board_list";
 	}
-
+/*
+ * board_num 이 있어야 reply_num 갯수를 가져올 수 있음 
+ * board_num 이 있으려면 boardVO 를 가져와야 함
+ * */
+	
+	
 	// ========================================= 글 상세 화면 view
 	// http://localhost:8080/board/board_read/7
 	@GetMapping("/board_read/{board_num}")
