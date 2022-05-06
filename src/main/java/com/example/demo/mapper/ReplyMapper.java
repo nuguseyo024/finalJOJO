@@ -15,4 +15,5 @@ public interface ReplyMapper {
 	int reply_delete(int reply_num);
 	// 댓글 번호를 가지고 하나의 댓글 정보르 가져오는 메소드 
 	ReplyVO selectReplyNum(int reply_num);
+	int replyCount_update(int r_board_num);
 }

@@ -55,11 +55,6 @@ public class BoardController {
 
 		return "/board/board_list";
 	}
-/*
- * board_num 이 있어야 reply_num 갯수를 가져올 수 있음 
- * board_num 이 있으려면 boardVO 를 가져와야 함
- * */
-	
 	
 	// ========================================= 글 상세 화면 view
 	// http://localhost:8080/board/board_read/7
