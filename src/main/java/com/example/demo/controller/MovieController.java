@@ -21,28 +21,28 @@ public class MovieController {
 	@Autowired
 	private MovieSvc svc;
 
-	// ========================================= 영화 메인 화면 
+	// ========================================= 영화 메인 화면
 	@GetMapping("/movie_list")
 	public String getListByPage(Model model) {
 		model.addAttribute("movie", svc.movie_list());
 		return "/movie/movie_list";
 	}
 
-	// ========================================= 영화 상세 화면 
+	// ========================================= 영화 상세 화면
 	@GetMapping("/movie_read/{code}")
 	public String movie_read(@PathVariable("code") int code, Model model) {
 		MovieVO movie = svc.movie_read(code);
 		model.addAttribute("movie", movie);
 		return "/movie/movie_read";
 	}
-	
-	// ========================================= 영화 검색 화면
-		// http://localhost:8080/movie/movie_searchList?keyword={검색어}
-		@GetMapping("/movie_searchList")
-		public String movie_searchList(@RequestParam("keyword") String keyword, Model model) {
-			List<MovieVO> list = svc.movie_search(keyword);
-			model.addAttribute("list", list);
 
-			return "/movie/movie_searchList";
-		}
+	// ========================================= 영화 검색 화면
+	// http://localhost:8080/movie/movie_searchList?keyword={검색어}
+	@GetMapping("/movie_searchList")
+	public String movie_searchList(@RequestParam("keyword") String keyword, Model model) {
+		List<MovieVO> list = svc.movie_search(keyword);
+		model.addAttribute("list", list);
+		model.addAttribute("keyword", keyword);
+		return "/movie/movie_searchList";
+	}
 }
