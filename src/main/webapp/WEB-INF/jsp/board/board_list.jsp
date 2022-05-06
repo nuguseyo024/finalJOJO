@@ -49,7 +49,11 @@
 							<td>${board.board_num }</td>
 							<td><a href="/board/board_read/${board.board_num }" style="text-decoration: none; color: black;">
 									${board.board_title }</a> 
-									 <small>[ ${board.reply_count } ]</small> </td>
+									<c:if test="${board.reply_count ne 0}">	
+										<small>[ ${board.reply_count } ]</small> 
+									</c:if>	
+									
+									 </td>
 							<td>${board.b_user_id }</td>
 							<td>${board.board_date }</td>
 							<td>${board.board_hit }</td>

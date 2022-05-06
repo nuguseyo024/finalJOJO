@@ -34,7 +34,6 @@ public class BoardController {
 	// http://localhost:8080/board/write_view
 	@GetMapping("/write_view")
 	public String board_write() {
-		System.out.println("board_write");
 		return "/board/board_write";
 	}
 
@@ -42,7 +41,6 @@ public class BoardController {
 	@PostMapping("/write")
 	@ResponseBody
 	public String board_writeAction(BoardVO board) {
-		System.out.println("svc.board_writeAction(BoardVO board) :  " + svc.board_insert(board));
 		return String.format("{\"inserted\":%b}", svc.board_insert(board));
 	}
 
@@ -75,7 +73,6 @@ public class BoardController {
 	@PostMapping("/delete")
 	@ResponseBody
 	public String board_delete(int board_num) {
-		System.out.println("svc.board_delete(int board_num) :  " + svc.board_delete(board_num));
 		return String.format("{\"deleted\":%b}", svc.board_delete(board_num));
 	}
 

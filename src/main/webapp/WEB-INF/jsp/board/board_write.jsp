@@ -36,7 +36,6 @@ if (session.getAttribute("user_id") != null) {
 			data : serData,
 			dataType : 'json',
 			success : function(res) {
-				alert(res.inserted ? '성공' : '실패');
 				location.href = '/board/board_list/1';
 			},
 			error : function(xhr, status, err) {
