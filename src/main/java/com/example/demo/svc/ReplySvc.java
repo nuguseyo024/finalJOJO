@@ -34,4 +34,12 @@ public class ReplySvc {
 	public 	ReplyVO selectReplyNum(int reply_num) {
 		return dao.selectReplyNum(reply_num);
 	}
+
+
+	public int replyCount_update(int r_board_num) {
+		return dao.replyCount_update(r_board_num);
+		
+	}
+
+
 }

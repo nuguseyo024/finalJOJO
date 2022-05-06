@@ -29,4 +29,9 @@ public class ReplyDAO implements ReplyMapper {
 		return mapper.selectReplyNum(reply_num);
 	}
 
+	public int replyCount_update(int r_board_num) {
+		return mapper.replyCount_update(r_board_num);
+	}
+
+
 }

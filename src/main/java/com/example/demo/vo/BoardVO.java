@@ -8,12 +8,13 @@ public class BoardVO {
 	private String board_content;
 	private String board_date;
 	private int board_hit;
+	private int reply_count;
 	
 	public BoardVO() {}
 
-	public BoardVO(int board_num, int b_user_num, String b_user_id, String board_title, String board_content, 
-			String board_date, int board_hit) 
-	{
+
+	public BoardVO(int board_num, int b_user_num, String b_user_id, String board_title, String board_content,
+			String board_date, int board_hit, int reply_count) {
 		super();
 		setBoard_num(board_num);
 		setB_user_num(b_user_num);
@@ -22,6 +23,16 @@ public class BoardVO {
 		setBoard_content(board_content);
 		setBoard_date(board_date);
 		setBoard_hit(board_hit);
+		setReply_count(reply_count);
+	}
+
+
+	public int getReply_count() {
+		return reply_count;
+	}
+
+	public void setReply_count(int reply_count) {
+		this.reply_count = reply_count;
 	}
 
 	public int getBoard_num() {

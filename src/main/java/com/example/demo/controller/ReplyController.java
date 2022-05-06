@@ -22,6 +22,10 @@ public class ReplyController {
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String reply_insert(ReplyVO reply) {
 		svc.reply_insert(reply);
-		return "redirect:/board/board_read/" + reply.getR_board_num();
+		int r_board_num = reply.getR_board_num();
+		// TB_board reply_count update
+		svc.replyCount_update(r_board_num);
+		
+		return "redirect:/board/board_read/" + r_board_num;
 	}
 }

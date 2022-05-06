@@ -47,9 +47,9 @@
 					<c:forEach var="board" items="${pageInfo.list }">
 						<tr>
 							<td>${board.board_num }</td>
-							<td><a href="/board/board_read/${board.board_num }"
-								style="text-decoration: none; color: black;">
-									${board.board_title }</a></td>
+							<td><a href="/board/board_read/${board.board_num }" style="text-decoration: none; color: black;">
+									${board.board_title }</a> 
+									 <small>[ ${board.reply_count } ]</small> </td>
 							<td>${board.b_user_id }</td>
 							<td>${board.board_date }</td>
 							<td>${board.board_hit }</td>
@@ -57,6 +57,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+
 			<!-- ------------------------- 게시판 영역 끝 --------------------------------- -->
 
 			<!-- ------------------------- 페이징 처리 영역 시작  --------------------------------- -->

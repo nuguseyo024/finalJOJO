@@ -52,7 +52,7 @@ public class BoardController {
 	public String getListByPage(@PathVariable("pgNum") int pg, Model model) {
 		PageInfo<BoardVO> pgInfo = svc.board_getList_page(pg, 10);
 		model.addAttribute("pageInfo", pgInfo);
-		
+
 		return "/board/board_list";
 	}
 /*
