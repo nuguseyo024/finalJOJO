@@ -7,17 +7,17 @@
 
 <%
 
-// 	String b_user_id  = (String) session.getAttribute("b_user_id");
-// 	String user_id = null;
-// 	if(session.getAttribute("user_id")!=null){
-// 		user_id = (String) session.getAttribute("user_id");
-// 	}else if(user_id==null){
-// 		PrintWriter script = response.getWriter();
-// 		script.println("<script>");
-// 		script.println("alert('로그인을 해주세요!')");
-// 		script.println("location.href='/login'");
-// 		script.println("</script>");
-// 	}
+	String b_user_id  = (String) session.getAttribute("b_user_id");
+	String user_id = null;
+	if(session.getAttribute("user_id")!=null){
+		user_id = (String) session.getAttribute("user_id");
+	}else if(user_id==null){
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('로그인을 해주세요!')");
+		script.println("location.href='/login'");
+		script.println("</script>");
+	}
 %>
 
 <!DOCTYPE html>
@@ -117,8 +117,8 @@
 			      <td>   ${movie.age }  </td>		    
 			      <td>   ${movie.genre }  </td>
 			      <td>   ${movie.runningTime }  </td>		      
-			      <td>   ${movie.netizens_participate }  </td>
-			      <td><strong>  ${movie.netizens_rate }  </strong></td>
+			      <td>  <fmt:formatNumber value="${movie.netizens_participate }" pattern="0,000"/> </td>
+			      <td><strong>  ${movie.netizens_rate } 점  </strong></td>
 			    </tr>      
 			  </tbody>
 			</table>
