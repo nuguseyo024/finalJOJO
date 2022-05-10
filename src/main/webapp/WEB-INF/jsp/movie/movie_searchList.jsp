@@ -82,6 +82,7 @@
          <div class="row">
             <div class="col-md-7 offset-md-1 col-sm-12">
                 <strong>" ${keyword} "</strong>  에 대한 검색 결과입니다 
+                <br>
                  <form id="search_form" method="get" action="/movie/movie_searchList">
 					<input type="text" id="keyword" name="keyword" placeholder="Search">
 					<button type="submit">search</button>

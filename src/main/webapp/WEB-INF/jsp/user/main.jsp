@@ -88,7 +88,7 @@
          <div class="row">
             <div class="col-md-7 offset-md-1 col-sm-12">
                <p class="pb-5 pt-5">
-               	몇 개의 평점으로 내 취향의 영화를 찾아보세요!
+               	요즘 뜨는 영화들 
                </p>
             </div>
          </div>
@@ -100,14 +100,12 @@
             <div class="row justify-content-md-center ">
                <div class="col-md-10 col-sm-12">
                   <div class="card-columns">
-                  
-                  
-          				<c:forEach var="movie" items="${movie }">        
+          		 <!--  <c:forEach var="movie" items="${movie }">     -->	    
                   <!--  이게 반복됨  -->
                      <div class="card card-hover h-100" >
                         <div class="card-body">
                            <a href="index.html">
-                              <img class="card-img-top" src="${movie.poster_url }" alt="Card image cap">
+                              <img class="card-img-top" src="https://movie.naver.com/movie/bi/mi/photoViewPopup.naver?movieCode=182016" alt="Card image cap">
                               <div class="reveal h-100 p-2 d-flex ">
                                  <div class="w-100 align-self-center">
                                     <p>+</p>
@@ -116,20 +114,164 @@
                            </a>
                         </div>
                      </div>
-                </c:forEach>     
-
-
-                 
+                 <!-- </c:forEach>      -->                 
                   </div>
                </div>
             </div>
          </div>
       </div>
       <!-- End Gallery -->
+      <div class="container-fluid pb-5 portfolio-text">
+      	<div class="row">
+        	<div class="col-md-7 offset-md-1 col-sm-12">
+               <p class="pb-5 pt-5">
+               	${user_id}님과 성향이 비슷한 사람들이 본 영화들
+               </p>
+            </div>
+         </div>
+       </div>
+      <!-- Gallery -->
+      <div class="scrollblock">
+         <div class="container-fluid pt-10">
+            <div class="row justify-content-md-center ">
+               <div class="col-md-10 col-sm-12">
+                  <div class="card-columns">
+          		 <!--  <c:forEach var="movie" items="${movie }">     -->	    
+                  <!--  이게 반복됨  -->
+                     <div class="card card-hover h-100" >
+                        <div class="card-body">
+                           <a href="index.html">
+                              <img class="card-img-top" src="https://movie.naver.com/movie/bi/mi/photoViewPopup.naver?movieCode=182016" alt="Card image cap">
+                              <div class="reveal h-100 p-2 d-flex ">
+                                 <div class="w-100 align-self-center">
+                                    <p>+</p>
+                                 </div>
+                              </div>
+                           </a>
+                        </div>
+                     </div>
+                 <!-- </c:forEach>      -->                 
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- End Gallery -->  
+
+      <div class="container-fluid pb-5 portfolio-text">
+      	<div class="row">
+        	<div class="col-md-7 offset-md-1 col-sm-12">
+               <p class="pb-5 pt-5">
+               	${user_id}님의 선호 감독&배우 관련 영화들
+               </p>
+            </div>
+         </div>
+       </div>
+      <!-- Gallery -->
+      <div class="scrollblock">
+         <div class="container-fluid pt-10">
+            <div class="row justify-content-md-center ">
+               <div class="col-md-10 col-sm-12">
+                  <div class="card-columns">
+          		 <!--  <c:forEach var="movie" items="${movie }">     -->	    
+                  <!--  이게 반복됨  -->
+                     <div class="card card-hover h-100" >
+                        <div class="card-body">
+                           <a href="index.html">
+                              <img class="card-img-top" src="https://movie.naver.com/movie/bi/mi/photoViewPopup.naver?movieCode=182016" alt="Card image cap">
+                              <div class="reveal h-100 p-2 d-flex ">
+                                 <div class="w-100 align-self-center">
+                                    <p>+</p>
+                                 </div>
+                              </div>
+                           </a>
+                        </div>
+                     </div>
+                 <!-- </c:forEach>      -->                 
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- End Gallery -->  
+
+     <div class="container-fluid pb-5 portfolio-text">
+      	<div class="row">
+        	<div class="col-md-7 offset-md-1 col-sm-12">
+               <p class="pb-5 pt-5">
+               	${user_id}님이 관심있어 하는 장르의 영화들
+               </p>
+            </div>
+         </div>
+       </div>
+      <!-- Gallery -->
+      <div class="scrollblock">
+         <div class="container-fluid pt-10">
+            <div class="row justify-content-md-center ">
+               <div class="col-md-10 col-sm-12">
+                  <div class="card-columns">
+          		 <!--  <c:forEach var="movie" items="${movie }">     -->	    
+                  <!--  이게 반복됨  -->
+                     <div class="card card-hover h-100" >
+                        <div class="card-body">
+                           <a href="index.html">
+                              <img class="card-img-top" src="https://movie.naver.com/movie/bi/mi/photoViewPopup.naver?movieCode=182016" alt="Card image cap">
+                              <div class="reveal h-100 p-2 d-flex ">
+                                 <div class="w-100 align-self-center">
+                                    <p>+</p>
+                                 </div>
+                              </div>
+                           </a>
+                        </div>
+                     </div>
+                 <!-- </c:forEach>      -->                 
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- End Gallery --> 
+      
+      <div class="container-fluid pb-5 portfolio-text">
+      	<div class="row">
+        	<div class="col-md-7 offset-md-1 col-sm-12">
+               <p class="pb-5 pt-5">
+               	딥러닝시 도출된 관련 영화 목록
+               </p>
+            </div>
+         </div>
+       </div>
+      <!-- Gallery -->
+      <div class="scrollblock">
+         <div class="container-fluid pt-10">
+            <div class="row justify-content-md-center ">
+               <div class="col-md-10 col-sm-12">
+                  <div class="card-columns">
+          		 <!--  <c:forEach var="movie" items="${movie }">     -->	    
+                  <!--  이게 반복됨  -->
+                     <div class="card card-hover h-100" >
+                        <div class="card-body">
+                           <a href="index.html">
+                              <img class="card-img-top" src="https://movie.naver.com/movie/bi/mi/photoViewPopup.naver?movieCode=182016" alt="Card image cap">
+                              <div class="reveal h-100 p-2 d-flex ">
+                                 <div class="w-100 align-self-center">
+                                    <p>+</p>
+                                 </div>
+                              </div>
+                           </a>
+                        </div>
+                     </div>
+                 <!-- </c:forEach>      -->                 
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- End Gallery -->  
+
       <!-- Footer -->
       <div class="container-fluid footer ">
          <div class="row">
-
             <div class="col-xl-2 col-md-8 offset-md-1 col-sm-12">
                <p>
                   Team Jojo, Project
