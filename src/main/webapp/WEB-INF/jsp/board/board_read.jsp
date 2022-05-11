@@ -102,11 +102,11 @@ function delReply(num){
 		
 		<a href="/board/board_update/${board.board_num}" class="btn btn-primary">수정</a>
 			<a href="javascript:del(${board.board_num })" class="btn btn-primary">삭제</a>
-			<a href="history.back()" class="btn btn-primary">이전</a>
+			<a href="javascript:history.back()" class="btn btn-primary">이전</a>
 	</c:if>			
 	<!-- 로그인한 아이디와 글 작성자가 다른 경우 : 수정/삭제 버튼 안 보임   -->
 	<c:if test="${user_id ne board.b_user_id }">
-			<a href="history.back()" class="btn btn-primary">이전</a>
+			<a href="javascript:history.back()" class="btn btn-primary">이전</a>
 	</c:if>
 	
 		</div>

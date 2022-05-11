@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.svc.MovieSvc;
-import com.example.demo.vo.BoardVO;
+import com.example.demo.svc.RatingSvc;
 import com.example.demo.vo.MovieVO;
+import com.example.demo.vo.RatingVO;
 
 @Controller
 @RequestMapping("/movie")
@@ -20,6 +21,8 @@ public class MovieController {
 
 	@Autowired
 	private MovieSvc svc;
+	@Autowired
+	private RatingSvc rtsvc;
 
 	// ========================================= 영화 메인 화면
 	@GetMapping("/movie_list")
@@ -33,6 +36,7 @@ public class MovieController {
 	public String movie_read(@PathVariable("code") int code, Model model) {
 		MovieVO movie = svc.movie_read(code);
 		model.addAttribute("movie", movie);
+		
 		return "/movie/movie_read";
 	}
 

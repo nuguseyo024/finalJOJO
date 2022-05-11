@@ -19,6 +19,26 @@
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
 	crossorigin="anonymous"></script>
 <script>
+
+function logout() {
+	if(!confirm('로그아웃 하시겠습니까?')) return;
+	$.ajax({
+		url:'/logout',
+		method:'get',
+		dataType:'json',
+		cache:false,
+		success:function(res) {
+			alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
+			if (res.logoutok) {
+				location.href="/main";
+			}
+		},
+		error:function(xhr,status,err) {
+			alert('error:' + err);
+		} 
+	});
+	return false;
+}
 	function user_out() {
 		if(!confirm('탈퇴하시겠습니까?')) return;
 		$.ajax({
