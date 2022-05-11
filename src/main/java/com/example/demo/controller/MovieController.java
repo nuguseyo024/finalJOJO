@@ -33,9 +33,15 @@ public class MovieController {
 
 	// ========================================= 영화 상세 화면
 	@GetMapping("/movie_read/{code}")
-	public String movie_read(@PathVariable("code") int code, Model model) {
+	public String movie_read(@PathVariable("code") int code,
+			@RequestParam("mv_code") int mv_code, 
+			@RequestParam("rt_user_id") String rt_user_id, Model model) {
+		
 		MovieVO movie = svc.movie_read(code);
 		model.addAttribute("movie", movie);
+		
+		RatingVO rating = rtsvc.select_mvRating(mv_code, rt_user_id);
+		model.addAttribute("rating", rating);
 		
 		return "/movie/movie_read";
 	}

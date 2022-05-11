@@ -1,6 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.io.PrintWriter"%>
+
+<%
+
+	String user_id = null;
+	if(session.getAttribute("user_id")!=null){
+		user_id = (String) session.getAttribute("user_id");
+	}else if(user_id==null){
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('로그인을 해주세요!')");
+		script.println("location.href='/login'");
+		script.println("</script>");
+	}
+%>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
    <head>
@@ -115,7 +130,7 @@
                   <!--  이게 반복됨  -->
                      <div class="card card-hover h-100" >
                         <div class="card-body">
-                           <a href="/movie/movie_read/${movie.code}">
+                           <a href="/movie/movie_read/${movie.code}?mv_code=${movie.code}&rt_user_id=${user_id}">
                               <img class="card-img-top" src="${movie.poster_url }" alt="Card image cap">
                               <div class="reveal h-100 p-2 d-flex ">
                                  <div class="w-100 align-self-center">

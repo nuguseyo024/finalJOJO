@@ -85,6 +85,12 @@
 			<div class="rows">
 				 <form oninput="r.value=parseFloat(rating.value)" onsubmit="rating_submit();" id="rating_form">
 				 <strong>별점을 매겨보세요!</strong>
+				 
+				 <c:if test="${user_id != null}">
+						<h2> ${rating.user_rating } </h2>
+				</c:if>	
+				 
+				 
 				 <br>
 			        <input style="width: 500px;" type="range" id="rating" name="rating" min="0.5" max="10" step="0.5">
 			        <output name="r" for="rating">  </output><br>
