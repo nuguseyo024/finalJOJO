@@ -69,9 +69,6 @@ function logout() {
                 	<c:if test="${user_id ne user.user_id}">
 						<a class="nav-link" href="/login">WELCOME! 로그인</a>
 					</c:if>	
-					<c:if test="${user_id eq user.user_id}">
-						<a class="nav-link">WELCOME, ${user_id}!</a>
-					</c:if>
                   </div>
                   <div class="button_container" id="toggle">
                      <span class="black top"></span>
@@ -81,9 +78,10 @@ function logout() {
                   <div class="overlay" id="overlay">
                      <nav class="overlay-menu">
                         <ul>
-                           <li> <a href="/board/board_list/1">Board</a></li>
-                           <li> <a href="/user_info/${user_id}">My page</a></li>
-                           <li> <a href="javascript:logout();">Logout</a></li>
+							<li> <a href="/movie/movie_list">Ratings</a></li>
+                           	<li> <a href="/board/board_list/1">Board</a></li>
+                           	<li> <a href="/user_info/${user_id}">My page</a></li>
+                           	<li> <a href="javascript:logout();">Logout</a></li>
                         </ul>
                      </nav>
                   </div>

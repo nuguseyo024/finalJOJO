@@ -75,27 +75,35 @@
 	<div class="container">
 	<br>
 		
-		<h3>
-			<strong>${movie.title }</strong> 
-		</h3>	
+		<h2>
+			 ${movie.title } 
+		</h2>	
 		<div class="container">
 			<span > <img src="${movie.poster_url }" onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'"></span> 
 			<button type="button" class="btn btn-outline-success" onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'">예매하러 가기 </button>
 		
 			<div class="rows">
-				 <form oninput="r.value=parseFloat(rating.value)" onsubmit="rating_submit();" id="rating_form">
-				 <strong>별점을 매겨보세요!</strong>
-				 
-				 <c:if test="${user_id != null}">
-						<h2> ${rating.user_rating } </h2>
+				 <c:if test="${rating.user_rating ne null}">
+
+						<h2> 내 점수는?   ${rating.user_rating }  점 </h2>
+				</c:if>
+				
+				 <c:if test="${rating.user_rating eq null}">
+					
+					<form oninput="r.value=parseFloat(rating.value)" method="post" action="/rating/write">
+					 <strong>별점을 매겨보세요!</strong><br>
+				 		 <input type="hidden" id="rating_num" name="rating_num" value="0" > 
+				 		 <input style="width: 500px;" type="range" id="user_rating" name="user_rating" min="0.5" max="10" step="0.5" oninput="document.getElementById('value1').innerHTML=this.value;">
+				 		  <strong><span id="value1"></span><br></strong>
+				 		 <input type="hidden" id="rt_user_id" name="rt_user_id" value="${user_id}"> 
+				 		 <input type="hidden" id="mv_code" name="mv_code" value="${movie.code}"> 
+				 		 <input type="hidden" id="rating_date" name="rating_date" value="now()"> 	 		 
+			      		 
+			    		  <button type="submit"> 확인 </button>
+					</form>
 				</c:if>	
-				 
-				 
-				 <br>
-			        <input style="width: 500px;" type="range" id="rating" name="rating" min="0.5" max="10" step="0.5">
-			        <output name="r" for="rating">  </output><br>
-			      <button type="submit"> 확인 </button>
-				</form>
+
+			       
 			</div>
 			<br>
 		</div>

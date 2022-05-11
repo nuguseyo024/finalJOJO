@@ -19,4 +19,8 @@ public class RatingSvc {
 	public RatingVO select_mvRating(int mv_code, String rt_user_id) {
 		return dao.select_mvRating(mv_code, rt_user_id);
 	}
+	
+	public int rating_insert(RatingVO rating) {
+		return dao.rating_insert(rating);
+	}
 }

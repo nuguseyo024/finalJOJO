@@ -7,32 +7,39 @@
       <!-- Meta -->
       <title>Home</title>
       <script>
-		function logout() {
-			if(!confirm('로그아웃 하시겠습니까?')) return;
-			$.ajax({
-				url:'/logout',
-				method:'get',
-				dataType:'json',
-				cache:false,
-				success:function(res) {
-					alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
-					if (res.logoutok) {
-						location.href="/main";
-					}
-				},
-				error:function(xhr,status,err) {
-					alert('error:' + err);
-				} 
-			});
-			return false;
-		}
-		
-		function search() {
-			var keyword = $('#keyword').val();
-			alert(keyword);
-			location.href = "/board/board_searchList/" + keyword;
-		}
-	  </script>
+      function logout() {
+         if(!confirm('로그아웃 하시겠습니까?')) return;
+         $.ajax({
+            url:'/logout',
+            method:'get',
+            dataType:'json',
+            cache:false,
+            success:function(res) {
+               alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
+               if (res.logoutok) {
+                  location.href="/main";
+               }
+            },
+            error:function(xhr,status,err) {
+               alert('error:' + err);
+            } 
+         });
+         return false;
+      }
+      
+      function search() {
+         var keyword = $('#keyword').val();
+         alert(keyword);
+         location.href = "/board/board_searchList/" + keyword;
+      }
+      
+      function toLogin() {
+         alert('로그인을 먼저 해주세요.');
+         location.href="/login";
+      }
+      
+      
+     </script>
       <meta charset="UTF-8">
       <meta name="description" content="Free HTML template">
       <meta name="keywords" content="HTML, template, free">
@@ -51,12 +58,12 @@
                <nav class="navbar navbar-default">
                   <a class="navbar-brand" href="/main">JOJO</a>
                   <div class="navbar-welcome">                          
-                	<c:if test="${user_id == null}">
-						<a class="nav-link" href="/login">WELCOME! 로그인</a>
-					</c:if>	
-					<c:if test="${user_id != null}">
-						<a class="nav-link">WELCOME, ${user_id}!</a>
-					</c:if>
+                   <c:if test="${user_id == null}">
+                  <a class="nav-link" href="/login">WELCOME! 로그인</a>
+               </c:if>   
+               <c:if test="${user_id != null}">
+                  <a class="nav-link">WELCOME, ${user_id}!</a>
+               </c:if>
                   </div>
                   <div class="button_container" id="toggle">
                      <span class="black top"></span>
@@ -66,9 +73,18 @@
                   <div class="overlay" id="overlay">
                      <nav class="overlay-menu">
                         <ul>
-                           <li> <a href="/board/board_list/1">Board</a></li>
-                           <li> <a href="/user_info/${user_id}">My page</a></li>
-                           <li> <a href="javascript:logout();">Logout</a></li>
+                           <c:if test="${user_id == null}">
+                        <li> <a href="/board/board_list/1">Board</a></li>
+                        <li> <a href="javascript:toLogin();">My page</a></li>
+                     </c:if>
+                        </ul>
+                        <ul>
+                           <c:if test="${user_id != null}">
+                       		   <li> <a href="/movie/movie_list">Ratings</a></li>
+                  				<li> <a href="/board/board_list/1">Board</a></li>
+                               <li> <a href="/user_info/${user_id}">My page</a></li>
+                               <li> <a href="javascript:logout();">Logout</a></li>
+                     </c:if>
                         </ul>
                      </nav>
                   </div>
@@ -88,7 +104,7 @@
          <div class="row">
             <div class="col-md-7 offset-md-1 col-sm-12">
                <p class="pb-5 pt-5">
-               	요즘 뜨는 영화들 
+                  요즘 뜨는 영화들 
                </p>
             </div>
          </div>
@@ -100,7 +116,7 @@
             <div class="row justify-content-md-center ">
                <div class="col-md-10 col-sm-12">
                   <div class="card-columns">
-          		 <!--  <c:forEach var="movie" items="${movie }">     -->	    
+                 <c:forEach var="main_movie" items="${main_movie }"> 
                   <!--  이게 반복됨  -->
                      <div class="card card-hover h-100" >
                         <div class="card-body">
@@ -114,7 +130,7 @@
                            </a>
                         </div>
                      </div>
-                 <!-- </c:forEach>      -->                 
+                  </c:forEach>          
                   </div>
                </div>
             </div>
@@ -122,10 +138,10 @@
       </div>
       <!-- End Gallery -->
       <div class="container-fluid pb-5 portfolio-text">
-      	<div class="row">
-        	<div class="col-md-7 offset-md-1 col-sm-12">
+         <div class="row">
+           <div class="col-md-7 offset-md-1 col-sm-12">
                <p class="pb-5 pt-5">
-               	${user_id}님과 성향이 비슷한 사람들이 본 영화들
+                  ${user_id}님과 성향이 비슷한 사람들이 본 영화들
                </p>
             </div>
          </div>
@@ -136,7 +152,7 @@
             <div class="row justify-content-md-center ">
                <div class="col-md-10 col-sm-12">
                   <div class="card-columns">
-          		 <!--  <c:forEach var="movie" items="${movie }">     -->	    
+                 <!--  <c:forEach var="movie" items="${movie }">     -->       
                   <!--  이게 반복됨  -->
                      <div class="card card-hover h-100" >
                         <div class="card-body">
@@ -159,10 +175,10 @@
       <!-- End Gallery -->  
 
       <div class="container-fluid pb-5 portfolio-text">
-      	<div class="row">
-        	<div class="col-md-7 offset-md-1 col-sm-12">
+         <div class="row">
+           <div class="col-md-7 offset-md-1 col-sm-12">
                <p class="pb-5 pt-5">
-               	${user_id}님의 선호 감독&배우 관련 영화들
+                  ${user_id}님의 선호 감독&배우 관련 영화들
                </p>
             </div>
          </div>
@@ -173,7 +189,7 @@
             <div class="row justify-content-md-center ">
                <div class="col-md-10 col-sm-12">
                   <div class="card-columns">
-          		 <!--  <c:forEach var="movie" items="${movie }">     -->	    
+                 <!--  <c:forEach var="movie" items="${movie }">     -->       
                   <!--  이게 반복됨  -->
                      <div class="card card-hover h-100" >
                         <div class="card-body">
@@ -196,10 +212,10 @@
       <!-- End Gallery -->  
 
      <div class="container-fluid pb-5 portfolio-text">
-      	<div class="row">
-        	<div class="col-md-7 offset-md-1 col-sm-12">
+         <div class="row">
+           <div class="col-md-7 offset-md-1 col-sm-12">
                <p class="pb-5 pt-5">
-               	${user_id}님이 관심있어 하는 장르의 영화들
+                  ${user_id}님이 관심있어 하는 장르의 영화들
                </p>
             </div>
          </div>
@@ -210,7 +226,7 @@
             <div class="row justify-content-md-center ">
                <div class="col-md-10 col-sm-12">
                   <div class="card-columns">
-          		 <!--  <c:forEach var="movie" items="${movie }">     -->	    
+                 <!--  <c:forEach var="movie" items="${movie }">     -->       
                   <!--  이게 반복됨  -->
                      <div class="card card-hover h-100" >
                         <div class="card-body">
@@ -233,10 +249,10 @@
       <!-- End Gallery --> 
       
       <div class="container-fluid pb-5 portfolio-text">
-      	<div class="row">
-        	<div class="col-md-7 offset-md-1 col-sm-12">
+         <div class="row">
+           <div class="col-md-7 offset-md-1 col-sm-12">
                <p class="pb-5 pt-5">
-               	딥러닝시 도출된 관련 영화 목록
+                  딥러닝시 도출된 관련 영화 목록
                </p>
             </div>
          </div>
@@ -247,7 +263,7 @@
             <div class="row justify-content-md-center ">
                <div class="col-md-10 col-sm-12">
                   <div class="card-columns">
-          		 <!--  <c:forEach var="movie" items="${movie }">     -->	    
+                 <!--  <c:forEach var="movie" items="${movie }">     -->       
                   <!--  이게 반복됨  -->
                      <div class="card card-hover h-100" >
                         <div class="card-body">

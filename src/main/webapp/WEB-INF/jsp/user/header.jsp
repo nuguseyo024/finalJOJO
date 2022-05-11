@@ -51,7 +51,9 @@
 			<li class="nav-item active"> 
 				<a class="nav-link" href="/board/board_list/1">Board</a>
 			</li>
-	  
+	  		<li class="nav-item active"> 
+				<a class="nav-link" href="/movie/movie_list">Ratings</a>
+			</li>
 			<li class="nav-item dropdown"> 
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown"> User </a> 
 				<div class="dropdown-menu"> 

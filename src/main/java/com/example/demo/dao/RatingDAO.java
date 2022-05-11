@@ -14,4 +14,7 @@ public class RatingDAO {
 	public RatingVO select_mvRating(int mv_code, String rt_user_id) {
 		return mapper.select_mvRating(mv_code, rt_user_id);
 	}
+	public int rating_insert(RatingVO rating) {
+		return mapper.rating_insert(rating);
+	}
 }

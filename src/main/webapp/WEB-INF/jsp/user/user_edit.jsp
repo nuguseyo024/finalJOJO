@@ -73,9 +73,10 @@
                   <div class="overlay" id="overlay">
                      <nav class="overlay-menu">
                         <ul>
-                           <li> <a href="/board/board_list/1">Board</a></li>
-                           <li> <a href="/user_info/${user_id}">My page</a></li>
-                           <li> <a href="javascript:logout();">Logout</a></li>
+							<li> <a href="/movie/movie_list">Ratings</a></li>
+                           	<li> <a href="/board/board_list/1">Board</a></li>
+                           	<li> <a href="/user_info/${user_id}">My page</a></li>
+                           	<li> <a href="javascript:logout();">Logout</a></li>
                         </ul>
                      </nav>
                   </div>
