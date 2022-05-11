@@ -23,4 +23,8 @@ public class RatingSvc {
 	public int rating_insert(RatingVO rating) {
 		return dao.rating_insert(rating);
 	}
+
+	public int rating_delete(int rating_num) {
+		return dao.rating_delete(rating_num);
+	}
 }

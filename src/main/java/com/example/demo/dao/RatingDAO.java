@@ -17,4 +17,7 @@ public class RatingDAO {
 	public int rating_insert(RatingVO rating) {
 		return mapper.rating_insert(rating);
 	}
+	public int rating_delete(int rating_num) {
+		return mapper.rating_delete(rating_num);
+	}
 }

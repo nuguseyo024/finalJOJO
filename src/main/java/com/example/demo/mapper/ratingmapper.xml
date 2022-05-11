@@ -10,30 +10,7 @@
 		VALUES (0, #{user_rating},
 				(SELECT user_num from TB_user WHERE user_id = #{rt_user_id}),
 				#{rt_user_id}, #{mv_code}, now())
-		</insert>
-
-	<!-- TB_board reply_count update -->
-	<update id="replyCount_update"
-		parameterType="com.example.demo.vo.ReplyVO">
-		UPDATE TB_board
-		SET reply_count = 
-			(SELECT count(reply_num) 
-				FROM TB_reply 
-				WHERE r_board_num = #{r_board_num})
-		WHERE board_num = #{r_board_num};
-	</update>
-
-
-	<select id="reply_read" resultType="com.example.demo.vo.ReplyVO"
-		parameterType="Integer">
-		SELECT * FROM TB_reply
-		WHERE r_board_num = #{r_board_num}
-	</select>
-
-	<delete id="reply_delete" parameterType="Integer">
-		DELETE FROM TB_reply
-		WHERE reply_num=#{reply_num}
-	</delete>
+	</insert>
 
 <!-- 유저의 아이디와 영화 코드를 가지고 그 영화의 별점을 가져오는 구문  -->
 	<select id="select_mvRating" resultType="com.example.demo.vo.RatingVO"
@@ -42,5 +19,20 @@
 		WHERE mv_code = #{mv_code}
 		AND rt_user_id = #{rt_user_id}
 	</select>
+	
+	<delete id="rating_delete" parameterType="Integer">
+		DELETE FROM TB_rating
+		WHERE rating_num = #{rating_num}
+	</delete>
+	
+	
+	
+	<select id="reply_read" resultType="com.example.demo.vo.ReplyVO"
+		parameterType="Integer">
+		SELECT * FROM TB_reply
+		WHERE r_board_num = #{r_board_num}
+	</select>
+
+	
 </mapper>
 	

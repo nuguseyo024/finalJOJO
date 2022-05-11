@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="java.io.PrintWriter"%>
@@ -53,10 +52,25 @@
 		location.href = "/movie/movie_searchList/" + keyword;
 	}
 	
-	function rating_submit(){
-		var rating = $('#rating').val();
-		alert(rating);
+	function del() {
+		if(!confirm('별점을 삭제합니다. ')) return;
+		alert(${rating.rating_num});
+		$.ajax({
+			url:'/rating/delete/${rating.rating_num}',
+			method:'get',
+			dataType:'json',
+			success:function(res) {
+				alert(res.deleted ? '성공' : '실패');
+				location.reload();
+			},
+			error:function(xhr,status,err) {
+				alert('error:' + err);
+			}
+		});
+		return false;
 	}
+
+	
 </script>
 <meta charset="UTF-8">
 <meta name="description" content="Free HTML template">
@@ -82,14 +96,18 @@
 			<span > <img src="${movie.poster_url }" onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'"></span> 
 			<button type="button" class="btn btn-outline-success" onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'">예매하러 가기 </button>
 		
-			<div class="rows">
-				 <c:if test="${rating.user_rating ne null}">
+			
 
+				 <c:if test="${rating.user_rating ne null}">
+					<div class="container">
 						<h2> 내 점수는?   ${rating.user_rating }  점 </h2>
+							
+					 <button type="submit" onclick="location.href='javascript:del()'" class="btn btn-outline-danger btn-sm">삭제</button>
+					</div>
 				</c:if>
 				
-				 <c:if test="${rating.user_rating eq null}">
-					
+			 <c:if test="${rating.user_rating eq null}">
+				<div class="rows">		
 					<form oninput="r.value=parseFloat(rating.value)" method="post" action="/rating/write">
 					 <strong>별점을 매겨보세요!</strong><br>
 				 		 <input type="hidden" id="rating_num" name="rating_num" value="0" > 
@@ -99,12 +117,13 @@
 				 		 <input type="hidden" id="mv_code" name="mv_code" value="${movie.code}"> 
 				 		 <input type="hidden" id="rating_date" name="rating_date" value="now()"> 	 		 
 			      		 
-			    		  <button type="submit"> 확인 </button>
+			    		  <button type="submit"  class="btn btn-outline-primary btn-sm"> 확인 </button>
 					</form>
-				</c:if>	
+				</div>
+			</c:if>	
 
 			       
-			</div>
+			
 			<br>
 		</div>
 		<div class="container">
