@@ -1,22 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page import="java.io.PrintWriter"%>
 <%@ include file="../user/header.jsp"%>
 
 <%
-
-	String b_user_id  = (String) session.getAttribute("b_user_id");
-	String user_id = null;
-	if(session.getAttribute("user_id")!=null){
-		user_id = (String) session.getAttribute("user_id");
-	}else if(user_id==null){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('로그인을 해주세요!')");
-		script.println("location.href='/login'");
-		script.println("</script>");
-	}
+String b_user_id = (String) session.getAttribute("b_user_id");
+String user_id = null;
+if (session.getAttribute("user_id") != null) {
+	user_id = (String) session.getAttribute("user_id");
+} else if (user_id == null) {
+	PrintWriter script = response.getWriter();
+	script.println("<script>");
+	script.println("alert('로그인을 해주세요!')");
+	script.println("location.href='/login'");
+	script.println("</script>");
+}
 %>
 
 <!DOCTYPE html>
@@ -45,8 +45,6 @@
 		});
 		return false;
 	}
-
-
 </script>
 <meta charset="UTF-8">
 <meta name="description" content="Free HTML template">
@@ -64,80 +62,107 @@
 
 
 
-<div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-    <div class="my-3 p-3">
-        <h2 class="display-5">${movie.title }</h2>
-        <p class="lead"><I>${movie.title_forn }</I> </p>
-    </div>
-    <div class="bg-body shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
-      	 <img src="${movie.poster_url }" onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'">
-    </div>
-      <button type="button" class="btn btn-outline-success" onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'">예매하러 가기 </button>    
-</div>
-
-	<div class="container">
-	<br>		
-				 <c:if test="${rating.user_rating ne null}">
-					<div class="text-center">		
-						<h2> <img src="star1.png" /> &starf; ${rating.user_rating }  점 &starf; </h2>							
-					 <a href="/movie/rating_update/${movie.code }?rating_num=${rating.rating_num}" class="btn btn-outline-warning btn-sm">점수 다시 주기 </a>
-					 
-					</div>
-				</c:if>
-				
-			 <c:if test="${rating.user_rating eq null}">
-				<div class="text-center">		
-					<form oninput="r.value=parseFloat(rating.value)" method="post" action="/rating/write">
-					 <strong>별점을 매겨보세요!</strong><br>
-				 		 <input type="hidden" id="rating_num" name="rating_num" value="0" > 
-				 		 <input style="width: 500px;" type="range" class="form-range" id="user_rating" name="user_rating" min="0.5" max="10" step="0.5" oninput="document.getElementById('value1').innerHTML=this.value;">
-				 		  <strong><span id="value1"></span><br></strong>
-				 		 <input type="hidden" id="rt_user_id" name="rt_user_id" value="${user_id}"> 
-				 		 <input type="hidden" id="mv_code" name="mv_code" value="${movie.code}"> 
-				 		 <input type="hidden" id="rating_date" name="rating_date" value="now()"> 	 		 
-			      		 
-			    		  <button type="submit"  class="btn btn-outline-primary btn-sm"> 확인 </button>
-					</form>
-				</div>
-			</c:if>	
-
-			       
-			
-			<br>
+	<div
+		class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+		<div class="my-3 p-3">
+			<h1 class="display-5"><B>${movie.title }</B></h1>
+			<p class="lead">
+				<I>${movie.title_forn }</I>
+			</p>
 		</div>
-		<div class="container">
-		<table class="table table-dark table-striped">
-			  <thead>
-			    <tr>
-			      <th >#</th>
-			      <th >Title</th>
-			      <th >감독 </th>
-			      <th >배우 </th>
-			      <th >Age</th>
-			      <th >Genre</th>
-			      <th >Running Time</th>
-			      <th >네티즌 평가 수 </th>
-			      <th >네티즌 평가  </th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <tr>
-			      <th></th>
-			      <td> ${movie.title_forn }  </td>
-			      <td>   ${movie.directors }  </td>		   
-			      <td>   ${movie.actors }  </td>		   
-			      <td>   ${movie.age }  </td>		    
-			      <td>   ${movie.genre }  </td>
-			      <td>   ${movie.runningTime }  </td>		      
-			      <td>  <fmt:formatNumber value="${movie.netizens_participate }" pattern="0,000"/> </td>
-			      <td><strong>  ${movie.netizens_rate } 점  </strong></td>
-			    </tr>      
-			  </tbody>
-			</table>
-			<br>
-			<h4>줄거리.. </h4>
-			<I>${movie.story }</I>
-	</div>		
-			
+		<div class="bg-body shadow-sm mx-auto"
+			style="width: 60%; height: 450px; border-radius: 21px 21px 0 0;">
+			<img src="${movie.poster_url }"
+				onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'">
+			<br><br>
+			<!-- 별점을 줬을 경우  -->
+			<c:if test="${rating.user_rating ne null}">
+				<div class="text-center">
+					<h2>
+						<!-- img src="star1.png" /> --> &starf; ${rating.user_rating } 점 &starf;
+					</h2>
+					<a
+						href="/movie/rating_update/${movie.code }?rating_num=${rating.rating_num}"
+						class="btn btn-outline-warning btn-sm">점수 다시 주기 </a>
+						<p>네티즌 평점 <strong> ${movie.netizens_rate } 점 </strong><br>
+							 평가자 수 <fmt:formatNumber value="${movie.netizens_participate }" pattern="0,000명" />
+						 </p>
+				</div>
+			</c:if>
+			<!-- 별점을 안 줬을 경우 (default) -->
+			<c:if test="${rating.user_rating eq null}">
+			<div class="text-center">
+				<form method="post" action="/rating/write">
+					<strong>&starf;별점을 매겨보세요!&starf;
+					</strong><br> <input type="hidden" id="rating_num" name="rating_num" value="0"> 
+						<input style="width: 500px;" type="range"
+						class="form-range" id="user_rating" name="user_rating" min="0.5"
+						max="10" step="0.5"
+						oninput="document.getElementById('value1').innerHTML=this.value;">
+					<strong><span id="value1"></span><br></strong> <input
+						type="hidden" id="rt_user_id" name="rt_user_id" value="${user_id}">
+					<input type="hidden" id="mv_code" name="mv_code"
+						value="${movie.code}"> <input type="hidden"
+						id="rating_date" name="rating_date" value="now()">
+
+					<button type="submit" class="btn btn-outline-primary btn-sm">
+						확인</button>
+				</form>
+			</div>
+			<p>네티즌 평점 <strong> ${movie.netizens_rate } 점 </strong><br>
+							 평가자 수 <fmt:formatNumber value="${movie.netizens_participate }" pattern="0,000명" />
+			 </p>
+		</c:if>
+
+		</div>
+		<br>
+		
+	</div>
+	<br>
+	<div class="container">
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+    <div class="d-flex gap-2 w-100 justify-content-between">
+      <div>
+        <h6 class="mb-0"><strong>${movie.title }</strong> <I>${movie.title_forn }</I>  &vellip;&vellip; <small>${movie.runningTime} &wreath; ${movie.age }</small></h6>
+      </div>
+    </div>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+    <div class="d-flex gap-2 w-100 justify-content-between">
+      <div>
+        <h6 class="mb-0"><strong>감독</strong> ${movie.directors } </h6>
+      </div>
+    </div>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+    <div class="d-flex gap-2 w-100 justify-content-between">
+      <div>
+        <h6 class="mb-0"><strong>배우</strong>  ${movie.actors } </h6>
+      </div>
+    </div>
+  </a>
+   <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+    <div class="d-flex gap-2 w-100 justify-content-between">
+      <div>
+        <h6 class="mb-0"><strong>장르</strong> 장르  ${movie.genre } </h6>
+      </div>
+    </div>
+  </a>
+</div>
+	</div>
+	
+      
+  <div class="container">
+    <h4 class="mt-5">줄거리...</h4>
+    <p class="lead"><I>${movie.story }</I></p>
+    <p><button type="button" class="btn btn-success"
+			onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'">예매하러 가기</button>
+	</p>
+  </div>
+      
+   
+
+
 </body>
 </html>

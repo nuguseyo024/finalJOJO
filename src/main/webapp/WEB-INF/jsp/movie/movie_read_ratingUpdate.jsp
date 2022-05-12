@@ -82,72 +82,85 @@
 </head>
 <body>
 
-	<div class="container">
-	<br>
-		
-		<h2>
-			 ${movie.title } 
-		</h2>	
-		<div class="container">
-			<span > <img src="${movie.poster_url }" onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'"></span> 
-			<button type="button" class="btn btn-outline-success" onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'">예매하러 가기 </button>
-			
-			
 
-	
+	<div
+		class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+		<div class="my-3 p-3">
+			<h1 class="display-5"><B>${movie.title }</B></h1>
+			<p class="lead">
+				<I>${movie.title_forn }</I>
+			</p>
+		</div>
+		<div class="bg-body shadow-sm mx-auto"
+			style="width: 60%; height: 450px; border-radius: 21px 21px 0 0;">
+			<img src="${movie.poster_url }"
+				onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'">
+			<br><br>
 
-				<div class="rows">		
-					<form id="update_form">
-					 <strong>별점을 매겨보세요!</strong><br>
-				 		 <input type="hidden" id="rating_num" name="rating_num" value="${rating.rating_num }" > 
+			<div class="text-center">
+				<form id="update_form">
+					<strong> &starf;별점을 매겨보세요!&starf; </strong><br> 
+					<input type="hidden" id="rating_num" name="rating_num" value="${rating.rating_num }" > 
 				 		 <input style="width: 500px;" type="range" id="user_rating" name="user_rating" min="0.5" max="10" step="0.5" value="${rating.user_rating }" oninput="document.getElementById('value1').innerHTML=this.value;">
 				 		  <strong><span id="value1"></span><br></strong>
 				 		 <input type="hidden" id="rt_user_id" name="rt_user_id" value="${user_id}"> 
 				 		 <input type="hidden" id="mv_code" name="mv_code" value="${rating.mv_code}"> 
 				 		 <input type="hidden" id="rating_date" name="rating_date" value="${rating.rating_date }">  
 			    		  <button type="button" onclick="updateAction();" class="btn btn-outline-primary btn-sm"> 확인  </button>
-					</form>
-				</div>
-
-
-			       
 			
-			<br>
+				</form>
+			</div>
+			<p>네티즌 평점 <strong> ${movie.netizens_rate } 점 </strong><br>
+				 평가자 수 <fmt:formatNumber value="${movie.netizens_participate }" pattern="0,000명" />
+			 </p>
 		</div>
-		<div class="container">
-		<table class="table table-dark table-striped">
-			  <thead>
-			    <tr>
-			      <th >#</th>
-			      <th >Title</th>
-			      <th >감독 </th>
-			      <th >배우 </th>
-			      <th >Age</th>
-			      <th >Genre</th>
-			      <th >Running Time</th>
-			      <th >네티즌 평가 수 </th>
-			      <th >네티즌 평가  </th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <tr>
-			      <th></th>
-			      <td> ${movie.title_forn }  </td>
-			      <td>   ${movie.directors }  </td>		   
-			      <td>   ${movie.actors }  </td>		   
-			      <td>   ${movie.age }  </td>		    
-			      <td>   ${movie.genre }  </td>
-			      <td>   ${movie.runningTime }  </td>		      
-			      <td>  <fmt:formatNumber value="${movie.netizens_participate }" pattern="0,000"/> </td>
-			      <td><strong>  ${movie.netizens_rate } 점  </strong></td>
-			    </tr>      
-			  </tbody>
-			</table>
-			<br>
-			<h4>줄거리.. </h4>
-			<I>${movie.story }</I>
-	</div>		
+		<br>
+		
 	</div>
+	<br>
+	<div class="container">
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+    <div class="d-flex gap-2 w-100 justify-content-between">
+      <div>
+        <h6 class="mb-0"><strong>${movie.title }</strong> <I>${movie.title_forn }</I>  &vellip;&vellip; <small>${movie.runningTime} &wreath; ${movie.age }</small></h6>
+      </div>
+    </div>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+    <div class="d-flex gap-2 w-100 justify-content-between">
+      <div>
+        <h6 class="mb-0"><strong>감독</strong> ${movie.directors } </h6>
+      </div>
+    </div>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+    <div class="d-flex gap-2 w-100 justify-content-between">
+      <div>
+        <h6 class="mb-0"><strong>배우</strong>  ${movie.actors } </h6>
+      </div>
+    </div>
+  </a>
+   <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+    <div class="d-flex gap-2 w-100 justify-content-between">
+      <div>
+        <h6 class="mb-0"><strong>장르</strong> 장르  ${movie.genre } </h6>
+      </div>
+    </div>
+  </a>
+</div>
+	</div>
+	
+      
+  <div class="container">
+    <h4 class="mt-5">줄거리...</h4>
+    <p class="lead"><I>${movie.story }</I></p>
+    <p><button type="button" class="btn btn-success"
+			onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'">예매하러 가기</button>
+	</p>
+  </div>
+      
+
 			
 </body>
 </html>

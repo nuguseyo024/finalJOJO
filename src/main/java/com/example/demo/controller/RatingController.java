@@ -39,8 +39,7 @@ public class RatingController {
 	// ========================================= 별점 수정 기능
 	@PostMapping("/update")
 	@ResponseBody
-	public String rating_updateAction(RatingVO rating, Model model) {
-		System.out.println("update");
+	public String rating_updateAction(RatingVO rating, Model model) {		
 		boolean updated = svc.rating_update(rating)>0;
 		return String.format("{\"updated\":%b}", updated);
 	}
