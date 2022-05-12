@@ -23,7 +23,10 @@
 <html lang="en" class="no-js">
 <head>
 <!-- Meta -->
-<title>movie_read</title>
+<title>movie_read_ratingUpdate</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" 
+   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+   crossorigin="anonymous"></script>
 <script>
 	function logout() {
 		if (!confirm('로그아웃 하시겠습니까?'))
@@ -45,7 +48,24 @@
 		});
 		return false;
 	}
-
+	
+	function updateAction(){
+		var serData = $('#update_form').serialize();
+		$.ajax({
+			url:'/rating/update',
+			method:'post',
+			cache:false,
+			data:serData,
+			dataType:'json',
+			success:function(res){
+				location.href='/movie/movie_read/${rating.mv_code}?mv_code=${rating.mv_code}&rt_user_id=${rating.rt_user_id}';
+			},
+			error:function(xhr,status,err){
+				alert('에러:'+err);
+			}
+		});
+		return false;
+	}
 
 </script>
 <meta charset="UTF-8">
@@ -73,29 +93,22 @@
 			<button type="button" class="btn btn-outline-success" onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'">예매하러 가기 </button>
 			
 			
-				 <c:if test="${rating.user_rating ne null}">
-					<div class="container">
-						<h2> 내 점수는?   ${rating.user_rating }  점 </h2>							
-					 <a href="/movie/rating_update/${movie.code }?rating_num=${rating.rating_num}" class="btn btn-outline-warning btn-sm">점수 다시 주기 </a>
-					 
-					</div>
-				</c:if>
-				
-			 <c:if test="${rating.user_rating eq null}">
+
+	
+
 				<div class="rows">		
-					<form oninput="r.value=parseFloat(rating.value)" method="post" action="/rating/write">
+					<form id="update_form">
 					 <strong>별점을 매겨보세요!</strong><br>
-				 		 <input type="hidden" id="rating_num" name="rating_num" value="0" > 
-				 		 <input style="width: 500px;" type="range" id="user_rating" name="user_rating" min="0.5" max="10" step="0.5" oninput="document.getElementById('value1').innerHTML=this.value;">
+				 		 <input type="hidden" id="rating_num" name="rating_num" value="${rating.rating_num }" > 
+				 		 <input style="width: 500px;" type="range" id="user_rating" name="user_rating" min="0.5" max="10" step="0.5" value="${rating.user_rating }" oninput="document.getElementById('value1').innerHTML=this.value;">
 				 		  <strong><span id="value1"></span><br></strong>
 				 		 <input type="hidden" id="rt_user_id" name="rt_user_id" value="${user_id}"> 
-				 		 <input type="hidden" id="mv_code" name="mv_code" value="${movie.code}"> 
-				 		 <input type="hidden" id="rating_date" name="rating_date" value="now()"> 	 		 
-			      		 
-			    		  <button type="submit"  class="btn btn-outline-primary btn-sm"> 확인 </button>
+				 		 <input type="hidden" id="mv_code" name="mv_code" value="${rating.mv_code}"> 
+				 		 <input type="hidden" id="rating_date" name="rating_date" value="${rating.rating_date }">  
+			    		  <button type="button" onclick="updateAction();" class="btn btn-outline-primary btn-sm"> 확인  </button>
 					</form>
 				</div>
-			</c:if>	
+
 
 			       
 			

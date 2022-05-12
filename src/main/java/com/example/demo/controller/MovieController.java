@@ -45,6 +45,19 @@ public class MovieController {
 		
 		return "/movie/movie_read";
 	}
+	
+	
+	// ========================================= 별점 수정 화면
+	@GetMapping("/rating_update/{code}")
+	public String rating_update(@PathVariable("code") int code, 
+				@RequestParam("rating_num") int rating_num, Model model) {
+		MovieVO movie = svc.movie_read(code);
+		model.addAttribute("movie", movie);
+		
+		RatingVO rating = rtsvc.rating_read(rating_num);
+		model.addAttribute("rating", rating);
+		return "/movie/movie_read_ratingUpdate";
+	}
 
 	// ========================================= 영화 검색 화면
 	// http://localhost:8080/movie/movie_searchList?keyword={검색어}

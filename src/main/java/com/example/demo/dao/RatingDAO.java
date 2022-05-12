@@ -20,4 +20,10 @@ public class RatingDAO {
 	public int rating_delete(int rating_num) {
 		return mapper.rating_delete(rating_num);
 	}
+	public RatingVO rating_read(int rating_num) {
+		return mapper.rating_read(rating_num);
+	}
+	public int rating_update(RatingVO rating) {
+		return mapper.rating_update(rating);
+	}
 }

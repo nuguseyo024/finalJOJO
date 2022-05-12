@@ -27,4 +27,12 @@ public class RatingSvc {
 	public int rating_delete(int rating_num) {
 		return dao.rating_delete(rating_num);
 	}
+
+	public RatingVO rating_read(int rating_num) {
+		return dao.rating_read(rating_num);
+	}
+
+	public int rating_update(RatingVO rating) {
+		return dao.rating_update(rating);
+	}
 }

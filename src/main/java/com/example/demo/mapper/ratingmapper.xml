@@ -26,13 +26,19 @@
 	</delete>
 	
 	
-	
-	<select id="reply_read" resultType="com.example.demo.vo.ReplyVO"
+	<select id="rating_read" resultType="com.example.demo.vo.RatingVO"
 		parameterType="Integer">
-		SELECT * FROM TB_reply
-		WHERE r_board_num = #{r_board_num}
+		SELECT * FROM TB_rating
+		WHERE rating_num = #{rating_num}
 	</select>
 
+	<update id="rating_update"
+		parameterType="com.example.demo.vo.RatingVO">
+		UPDATE TB_rating
+		SET user_rating=#{user_rating}
+		WHERE rating_num=#{rating_num}
+	</update>
+	
 	
 </mapper>
 	

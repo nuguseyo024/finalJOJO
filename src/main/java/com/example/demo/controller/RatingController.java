@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.demo.svc.RatingSvc;
+import com.example.demo.vo.BoardVO;
 import com.example.demo.vo.RatingVO;
 
 @Controller
@@ -24,19 +26,26 @@ public class RatingController {
 	@Autowired
 	private RatingSvc svc;
 
-	
-	// ========================================= 별점 주기  
+	// ========================================= 별점 주기
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String reply_insert(RatingVO rating) {
 		svc.rating_insert(rating);
 		int mv_code = rating.getMv_code();
 		String rt_user_id = rating.getRt_user_id();
 
-		return "redirect:/movie/movie_read/" + mv_code+"?mv_code="+mv_code+"&rt_user_id="+rt_user_id;
+		return "redirect:/movie/movie_read/" + mv_code + "?mv_code=" + mv_code + "&rt_user_id=" + rt_user_id;
 	}
-	
-	// ========================================= 별점 삭제 
-//	}
+
+	// ========================================= 별점 수정 기능
+	@PostMapping("/update")
+	@ResponseBody
+	public String rating_updateAction(RatingVO rating, Model model) {
+		System.out.println("update");
+		boolean updated = svc.rating_update(rating)>0;
+		return String.format("{\"updated\":%b}", updated);
+	}
+
+//	// ========================================= 별점 삭제 
 //	@PostMapping("/delete")
 //	@ResponseBody
 //	public String rating_delete(int rating_num) {
@@ -44,12 +53,12 @@ public class RatingController {
 //		boolean res = svc.rating_delete(rating_num)>0;
 //		return String.format("{\"deleted\":%b}", res);
 //	}
-	
-	@GetMapping("/delete/{rating_num}")
-	@ResponseBody
-	public String userOut(@PathVariable("rating_num") int rating_num) {
-		System.out.println("삭제 ");
-		boolean res = svc.rating_delete(rating_num)>0;
-		return String.format("{\"deleted\":%b}", res);
-	}
+
+//	@GetMapping("/delete/{rating_num}")
+//	@ResponseBody
+//	public String userOut(@PathVariable("rating_num") int rating_num) {
+//		System.out.println("삭제 ");
+//		boolean res = svc.rating_delete(rating_num)>0;
+//		return String.format("{\"deleted\":%b}", res);
+//	}
 }
