@@ -62,31 +62,35 @@
 </head>
 <body>
 
+
+
+<div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+    <div class="my-3 p-3">
+        <h2 class="display-5">${movie.title }</h2>
+        <p class="lead"><I>${movie.title_forn }</I> </p>
+    </div>
+    <div class="bg-body shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+      	 <img src="${movie.poster_url }" onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'">
+    </div>
+      <button type="button" class="btn btn-outline-success" onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'">예매하러 가기 </button>    
+</div>
+
 	<div class="container">
-	<br>
-		
-		<h2>
-			 ${movie.title } 
-		</h2>	
-		<div class="container">
-			<span > <img src="${movie.poster_url }" onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'"></span> 
-			<button type="button" class="btn btn-outline-success" onclick="location.href='https://movie.naver.com/movie/bi/mi/basic.naver?code=${movie.code}'">예매하러 가기 </button>
-			
-			
+	<br>		
 				 <c:if test="${rating.user_rating ne null}">
-					<div class="container">
-						<h2> 내 점수는?   ${rating.user_rating }  점 </h2>							
+					<div class="text-center">		
+						<h2> <img src="star1.png" /> &starf; ${rating.user_rating }  점 &starf; </h2>							
 					 <a href="/movie/rating_update/${movie.code }?rating_num=${rating.rating_num}" class="btn btn-outline-warning btn-sm">점수 다시 주기 </a>
 					 
 					</div>
 				</c:if>
 				
 			 <c:if test="${rating.user_rating eq null}">
-				<div class="rows">		
+				<div class="text-center">		
 					<form oninput="r.value=parseFloat(rating.value)" method="post" action="/rating/write">
 					 <strong>별점을 매겨보세요!</strong><br>
 				 		 <input type="hidden" id="rating_num" name="rating_num" value="0" > 
-				 		 <input style="width: 500px;" type="range" id="user_rating" name="user_rating" min="0.5" max="10" step="0.5" oninput="document.getElementById('value1').innerHTML=this.value;">
+				 		 <input style="width: 500px;" type="range" class="form-range" id="user_rating" name="user_rating" min="0.5" max="10" step="0.5" oninput="document.getElementById('value1').innerHTML=this.value;">
 				 		  <strong><span id="value1"></span><br></strong>
 				 		 <input type="hidden" id="rt_user_id" name="rt_user_id" value="${user_id}"> 
 				 		 <input type="hidden" id="mv_code" name="mv_code" value="${movie.code}"> 
@@ -134,7 +138,6 @@
 			<h4>줄거리.. </h4>
 			<I>${movie.story }</I>
 	</div>		
-	</div>
 			
 </body>
 </html>
