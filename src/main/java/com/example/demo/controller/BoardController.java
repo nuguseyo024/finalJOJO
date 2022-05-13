@@ -51,7 +51,7 @@ public class BoardController {
 		PageInfo<BoardVO> pgInfo = svc.board_getList_page(pg, 10);
 		model.addAttribute("pageInfo", pgInfo);
 
-		return "/board/board_list";
+		return "/board/board_list2";
 	}
 	
 	// ========================================= 글 상세 화면 view
@@ -65,8 +65,10 @@ public class BoardController {
 		// 댓글 리스트 불러오는 부분
 		List<ReplyVO> replyList = replySvc.reply_read(board_num);
 		model.addAttribute("replyList", replyList);
-
-		return "/board/board_read";
+		if(svc.board_hitUpdate(board_num)>0) {
+			return "/board/board_read";
+		}
+		return "board_hitUpdate 실패 ";
 	}
 
 	// ========================================= 글 삭제 기능

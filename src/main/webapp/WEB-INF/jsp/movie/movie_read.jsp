@@ -65,9 +65,9 @@ if (session.getAttribute("user_id") != null) {
 	<div
 		class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
 		<div class="my-3 p-3">
-			<h1 class="display-5"><B>${movie.title }</B></h1>
+			<h1 class="display-5"><B>${movie.title_kor }</B></h1>
 			<p class="lead">
-				<I>${movie.title_forn }</I>
+				<I>${movie.title_eng }</I>
 			</p>
 		</div>
 		<div class="bg-body shadow-sm mx-auto"
@@ -84,8 +84,8 @@ if (session.getAttribute("user_id") != null) {
 					<a
 						href="/movie/rating_update/${movie.code }?rating_num=${rating.rating_num}"
 						class="btn btn-outline-warning btn-sm">점수 다시 주기 </a>
-						<p>네티즌 평점 <strong> ${movie.netizens_rate } 점 </strong><br>
-							 평가자 수 <fmt:formatNumber value="${movie.netizens_participate }" pattern="0,000명" />
+						<p>네티즌 평점 <strong> ${movie.naver_user_rate } 점 </strong><br>
+							 평가자 수 <fmt:formatNumber value="${movie.naver_user_participate }" pattern="0,000명" />
 						 </p>
 				</div>
 			</c:if>
@@ -97,7 +97,7 @@ if (session.getAttribute("user_id") != null) {
 					</strong><br> <input type="hidden" id="rating_num" name="rating_num" value="0"> 
 						<input style="width: 500px;" type="range"
 						class="form-range" id="user_rating" name="user_rating" min="0.5"
-						max="10" step="0.5"
+						max="5" step="0.5"
 						oninput="document.getElementById('value1').innerHTML=this.value;">
 					<strong><span id="value1"></span><br></strong> <input
 						type="hidden" id="rt_user_id" name="rt_user_id" value="${user_id}">
@@ -109,9 +109,9 @@ if (session.getAttribute("user_id") != null) {
 						확인</button>
 				</form>
 			</div>
-			<p>네티즌 평점 <strong> ${movie.netizens_rate } 점 </strong><br>
-							 평가자 수 <fmt:formatNumber value="${movie.netizens_participate }" pattern="0,000명" />
-			 </p>
+			<p>네티즌 평점 <strong> ${movie.naver_user_rate } 점 </strong><br>
+				평가자 수 <fmt:formatNumber value="${movie.naver_user_participate }" pattern="0,000명" />
+			</p>
 		</c:if>
 
 		</div>
@@ -121,31 +121,31 @@ if (session.getAttribute("user_id") != null) {
 	<br>
 	<div class="container">
 <div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+  <a class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
     <div class="d-flex gap-2 w-100 justify-content-between">
       <div>
-        <h6 class="mb-0"><strong>${movie.title }</strong> <I>${movie.title_forn }</I>  &vellip;&vellip; <small>${movie.runningTime} &wreath; ${movie.age }</small></h6>
+        <h6 class="mb-0"><strong>${movie.title_kor }</strong> <I>${movie.title_eng }</I>  &vellip;&vellip; <small>${movie.running_time} &wreath; ${movie.age }</small></h6>
       </div>
     </div>
   </a>
-  <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+  <a class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
     <div class="d-flex gap-2 w-100 justify-content-between">
       <div>
-        <h6 class="mb-0"><strong>감독</strong> ${movie.directors } </h6>
+        <h6 class="mb-0"><strong>감독</strong>  &vellip;&vellip; ${movie.directors_kor } </h6>
       </div>
     </div>
   </a>
-  <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+  <a  class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
     <div class="d-flex gap-2 w-100 justify-content-between">
       <div>
-        <h6 class="mb-0"><strong>배우</strong>  ${movie.actors } </h6>
+        <h6 class="mb-0"><strong>배우</strong> &vellip;&vellip; ${movie.cast_kor } </h6>
       </div>
     </div>
   </a>
-   <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+   <a  class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
     <div class="d-flex gap-2 w-100 justify-content-between">
       <div>
-        <h6 class="mb-0"><strong>장르</strong> 장르  ${movie.genre } </h6>
+        <h6 class="mb-0"><strong>장르</strong> &vellip;&vellip; ${movie.genres } </h6>
       </div>
     </div>
   </a>

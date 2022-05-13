@@ -15,6 +15,7 @@ public interface BoardMapper {
 		 * 3. 글 상세 불러오기 board_read -- 필요 인자 : board_num / 반환값 : boardVO(board_num에 해당하는 글 내용) 
 		 * 4. 글 삭제 board_delete -- 필요 인자 : board_num / 반환값 : int(실행 결과 : 성공/실패) 
 		 * 5. 글 수정 board_update -- 필요 인자 : boardVO / 반환값 : int(실행 결과 : 성공/실패) 
+		 * 6. 조회수 증가 board_hitUpdate 
 		 * 
 		 * */
 
@@ -24,4 +25,5 @@ public interface BoardMapper {
 	   int board_delete(int board_num);
 	   int board_update(BoardVO bbs);
 	   List<BoardVO>  board_search(String keyword);
+	   int board_hitUpdate (int board_num);
 }

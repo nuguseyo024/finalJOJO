@@ -54,4 +54,8 @@ public class BoardDAO {
 	public  List<BoardVO>  board_search(String keyword) {
 		return mapper.board_search(keyword);
 	}
+	
+	public int board_hitUpdate (int board_num) {
+		return mapper.board_hitUpdate(board_num);
+	}
 }

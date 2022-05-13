@@ -49,5 +49,13 @@
 		ORDER BY board_num desc
 	</select>
 
+	<!-- 조회수 증가  -->
+	<update id="board_hitUpdate"
+		parameterType="Integer">
+		UPDATE TB_board
+		SET board_hit = board_hit+1
+		WHERE board_num = #{board_num}
+	</update>
+	
 </mapper>
 	

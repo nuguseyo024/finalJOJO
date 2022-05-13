@@ -53,4 +53,8 @@ public class BoardSvc {
 	public  List<BoardVO>  board_search(String keyword) {
 		return dao.board_search(keyword);
 	}
+	
+	public int board_hitUpdate (int board_num) {
+		return dao.board_hitUpdate(board_num);
+	}
 }

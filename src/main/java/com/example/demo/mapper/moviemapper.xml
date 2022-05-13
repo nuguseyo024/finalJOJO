@@ -15,14 +15,18 @@
 		resultType="com.example.demo.vo.MovieVO">
 		SELECT * FROM TB_movie
 	</select>
+	
 	<select id="movie_search"
 		resultType="com.example.demo.vo.MovieVO" parameterType="String">
 		SELECT * FROM
 		TB_movie
-		WHERE title LIKE CONCAT('%',#{keyword},'%')
-		OR 	  directors LIKE CONCAT('%',#{keyword},'%')
-		OR 	  actors LIKE CONCAT('%',#{keyword},'%')
-		ORDER BY netizens_rate desc
+		WHERE title_kr LIKE CONCAT('%',#{keyword},'%')
+		OR 	  title_eng LIKE CONCAT('%',#{keyword},'%')
+		OR 	  director LIKE CONCAT('%',#{keyword},'%')
+		OR 	  directors_kor LIKE CONCAT('%',#{keyword},'%')
+		OR 	  cast LIKE CONCAT('%',#{keyword},'%')
+		OR 	  cast_kor LIKE CONCAT('%',#{keyword},'%')
+		ORDER BY naver_user_rate desc
 	</select>
 
 </mapper>
