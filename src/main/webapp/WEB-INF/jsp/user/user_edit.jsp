@@ -39,26 +39,35 @@
       return false;
    }
    
-	function logout() {
-		if (!confirm('로그아웃 하시겠습니까?'))
-			return;
-		$.ajax({
-			url : '/logout',
-			method : 'get',
-			dataType : 'json',
-			cache : false,
-			success : function(res) {
-				alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
-				if (res.logoutok) {
-					location.href = "/login";
-				}
-			},
-			error : function(xhr, status, err) {
-				alert('error:' + err);
-			}
-		});
-		return false;
-	}
+
+    function logout() {
+       if(!confirm('로그아웃 하시겠습니까?')) return;
+       $.ajax({
+          url:'/logout',
+          method:'get',
+          dataType:'json',
+          cache:false,
+          success:function(res) {
+             alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
+             if (res.logoutok) {
+                location.href="/login";
+             }
+          },
+          error:function(xhr,status,err) {
+             alert('error:' + err);
+          } 
+       });
+       return false;
+    }
+    
+    function openPopup() {
+       var popUrl = "/user_chkpwd_popup/${user.user_id}";
+       var popName = "chkPassword"
+       var popOption = "top = 300, left = 500, width = 700, height = 300";
+       window.open(popUrl, popName, popOption);
+    }
+   
+
 </script> 
 </head>
 <body>
@@ -68,7 +77,7 @@
          <div class="row justify-content-md-center ">
             <div class="col-md-10 col-sm-12">
                <nav class="navbar navbar-default">
-                 <a class="navbar-brand" href="/movie/main/${user_id}">JOJO</a>
+                  <a class="navbar-brand" href="/movie/main/${user_id}">JOJO</a>
                   <div class="navbar-welcome">                          
                    <c:if test="${user_id ne user.user_id}">
                   <a class="nav-link" href="/login">WELCOME! 로그인</a>
@@ -114,7 +123,7 @@
                                  <input type="hidden" id="user_id" name="user_id" value="${user.user_id }">
                                  <br>
                                  비밀번호 : 
-                                 <input type="password" id="user_pwd" name="user_pwd" value="${user.user_pwd }"><button type="button" onclick="location.href='/user_chgpwd/${user.user_id}';">수정</button>
+                                 <input type="password" id="user_pwd" name="user_pwd" value="${user.user_pwd }"><button type="button" onclick="openPopup();">수정</button>
                                  <br>
                                  이름 : ${user.user_name} 
                                  <input type="hidden" id="user_name" name="user_name" value="${user.user_name }" >
