@@ -25,7 +25,7 @@
 			success:function(res) {
 				alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
 				if (res.logoutok) {
-					location.href="/main";
+					location.href="/login";
 				}
 			},
 			error:function(xhr,status,err) {
@@ -33,13 +33,13 @@
 			} 
 		});
 		return false;
-	}
+	} 
 	</script>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="/main">JOJO</a>
+	<a class="navbar-brand" href="/movie/main/${user_id}">JOJO</a>
 	<div>
 		<ul	class="navbar-nav navbar-dark"> 
 				<c:if test="${user_id == null}">
@@ -51,9 +51,11 @@
 			<li class="nav-item active"> 
 				<a class="nav-link" href="/board/board_list/1">Board</a>
 			</li>
-	  		<li class="nav-item active"> 
+			
+			<li class="nav-item active"> 
 				<a class="nav-link" href="/movie/movie_list">Ratings</a>
 			</li>
+	  
 			<li class="nav-item dropdown"> 
 				<a class="nav-link dropdown-toggle" data-toggle="dropdown"> User </a> 
 				<div class="dropdown-menu"> 

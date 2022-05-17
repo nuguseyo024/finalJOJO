@@ -24,27 +24,29 @@ if (session.getAttribute("user_id") != null) {
 <head>
 <!-- Meta -->
 <title>movie_read</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
 <script>
-	function logout() {
-		if (!confirm('로그아웃 하시겠습니까?'))
-			return;
-		$.ajax({
-			url : '/logout',
-			method : 'get',
-			dataType : 'json',
-			cache : false,
-			success : function(res) {
-				alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
-				if (res.logoutok) {
-					location.href = "/main";
-				}
-			},
-			error : function(xhr, status, err) {
-				alert('error:' + err);
+function logout() {
+	if(!confirm('로그아웃 하시겠습니까?')) return;
+	$.ajax({
+		url:'/logout',
+		method:'get',
+		dataType:'json',
+		cache:false,
+		success:function(res) {
+			alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
+			if (res.logoutok) {
+				location.href="/login";
 			}
-		});
-		return false;
-	}
+		},
+		error:function(xhr,status,err) {
+			alert('error:' + err);
+		} 
+	});
+	return false;
+}
 </script>
 <meta charset="UTF-8">
 <meta name="description" content="Free HTML template">
@@ -93,18 +95,17 @@ if (session.getAttribute("user_id") != null) {
 			<c:if test="${rating.user_rating eq null}">
 			<div class="text-center">
 				<form method="post" action="/rating/write">
-					<strong>&starf;별점을 매겨보세요!&starf;
-					</strong><br> <input type="hidden" id="rating_num" name="rating_num" value="0"> 
+					<strong>&starf;별점을 매겨보세요!&starf; </strong><br> 
+					<img src="/../resources/img/star1.png" style="width:30px; height:30px;">
 						<input style="width: 500px;" type="range"
 						class="form-range" id="user_rating" name="user_rating" min="0.5"
-						max="5" step="0.5"
+						max="10" step="0.5"
 						oninput="document.getElementById('value1').innerHTML=this.value;">
-					<strong><span id="value1"></span><br></strong> <input
+					<strong><span id="value1"></span><img src="/../resources/img/star1.png" style="width:30px; height:30px;"><br></strong> <input
 						type="hidden" id="rt_user_id" name="rt_user_id" value="${user_id}">
 					<input type="hidden" id="mv_code" name="mv_code"
-						value="${movie.code}"> <input type="hidden"
-						id="rating_date" name="rating_date" value="now()">
-
+						value="${movie.code}"> 
+					
 					<button type="submit" class="btn btn-outline-primary btn-sm">
 						확인</button>
 				</form>

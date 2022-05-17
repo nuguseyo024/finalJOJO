@@ -77,7 +77,7 @@
          <div class="row justify-content-md-center ">
             <div class="col-md-10 col-sm-12">
                <nav class="navbar navbar-default">
-                  <a class="navbar-brand" href="/main">JOJO</a>
+                  <a class="navbar-brand" href="/movie/main/${user_id}">JOJO</a>
                   <div class="navbar-welcome">                          
                 	<c:if test="${user_id ne user.user_id}">
 						<a class="nav-link" href="/login">WELCOME! 로그인</a>

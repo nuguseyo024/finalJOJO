@@ -13,26 +13,26 @@
         <script>
          
         function login() {
-           var serData = $('#login_form').serialize();
-           $.ajax({
-              url:'/login',
-              method:'post',
-              cache:false,
-              data:serData,
-              dataType:'json',
-              success:function(res) {
-                 alert(res.loginsuccess ? '로그인 성공' : '로그인 실패');
-                 if (res.loginsuccess == true) {
-                    location.href = '/main';
-                 }
-              },
-              error:function(xhr,status,err) {
-                 alert('error:' + err);
-              }
-           });
-           return false;
-        }
-        
+            var user_id = $('#user_id').val();
+            var serData = $('#login_form').serialize();
+            $.ajax({
+               url:'/login',
+               method:'post',
+               cache:false,
+               data:serData,
+               dataType:'json',
+               success:function(res) {
+                  alert(res.loginsuccess ? '로그인 성공' : '로그인 실패');
+                  if (res.loginsuccess == true) {
+                     location.href = '/movie/main/' + user_id;
+                  }
+               },
+               error:function(xhr,status,err) {
+                  alert('error:' + err);
+               }
+            });
+            return false;
+         }
         </script>
     </head>
     <body>

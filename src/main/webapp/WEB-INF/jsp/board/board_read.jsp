@@ -64,6 +64,25 @@ function delReply(num){
 		}
 	});
 }
+function logout() {
+	if(!confirm('로그아웃 하시겠습니까?')) return;
+	$.ajax({
+		url:'/logout',
+		method:'get',
+		dataType:'json',
+		cache:false,
+		success:function(res) {
+			alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
+			if (res.logoutok) {
+				location.href="/login";
+			}
+		},
+		error:function(xhr,status,err) {
+			alert('error:' + err);
+		} 
+	});
+	return false;
+}
 
 </script>
 </head>
@@ -71,7 +90,7 @@ function delReply(num){
 <br>
 <body>
 	<div class="container">
-		<div class="row">
+		<div class="row">	
 		<table class="table table-striped" style="text-align: center; border:1px solid #dddddd">
 			<thead>
 				<tr>
@@ -81,7 +100,7 @@ function delReply(num){
 			<tbody>
 				<tr>
 					<td style="width: 20%;">제목</td>
-					<td colspan="2">no.${board.board_num} ${board.board_title}</td>
+					<td colspan="2">no.${board.board_num}  &vellip; &vellip; ${board.board_title}</td>
 				</tr>
 				<tr>
 					<td>작성자</td>
@@ -100,13 +119,13 @@ function delReply(num){
 	<!-- 로그인한 아이디와 글 작성자가 같은 경우에만 수정/삭제 버튼 보임  -->
 	<c:if test="${user_id eq board.b_user_id }">
 		
-		<a href="/board/board_update/${board.board_num}" class="btn btn-primary">수정</a>
-			<a href="javascript:del(${board.board_num })" class="btn btn-primary">삭제</a>
-			<a href="javascript:history.back()" class="btn btn-primary">이전</a>
+		<a href="/board/board_update/${board.board_num}" class="btn btn-primary">수정&nbsp;</a>
+			<a href="javascript:del(${board.board_num })" class="btn btn-primary">삭제&nbsp;</a>
+			<a href="javascript:history.back()" class="btn btn-primary">이전&nbsp;</a>
 	</c:if>			
 	<!-- 로그인한 아이디와 글 작성자가 다른 경우 : 수정/삭제 버튼 안 보임   -->
 	<c:if test="${user_id ne board.b_user_id }">
-			<a href="javascript:history.back()" class="btn btn-primary">이전</a>
+			<a href="javascript:history.back()" class="btn btn-primary">이전&nbsp;</a>
 	</c:if>
 	
 		</div>
@@ -117,30 +136,27 @@ function delReply(num){
 
 	<!-- 댓글 출력 영역  -->
 <br>
-	<div class="container">
-		<div class="row">
-		<table>
-		<c:forEach items="${replyList }" var="replyList">
-			<tr>
-				<td>${replyList.r_user_id }</td>
-				<td>${replyList.reply_content }</td>
-				<td><small>${replyList.reply_date }</small></td>
-				<td>	
-					<c:if test="${user_id eq replyList.r_user_id }">
-						<div>
-							<button type="button" id="deleteReply"
-								onclick="javascript:delReply(${replyList.reply_num})"
-									data-reply_number="${replyList.reply_num}">삭제</button>
-						</div>
-					</c:if>	
-				</td>	
-			</tr>
-		</c:forEach>
-		</table>
-		<hr>
 
-		</div>
-	</div>
+
+<div class="container">
+<div class="list-group">
+  <c:forEach items="${replyList }" var="replyList">
+	  <a class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+	    <div class="d-flex gap-2 w-100 justify-content-between">
+		      <div>
+		        <h6 class="mb-0"><strong>${replyList.r_user_id  }</strong> &vellip;&vellip; ${replyList.reply_content }</h6>
+		        <small class="mb-0 opacity-59">${replyList.reply_date } </small>
+		      </div>
+		      <c:if test="${user_id eq replyList.r_user_id }">	
+					<button type="button" class="btn btn-outline-danger btn-sm" id="deleteReply" onclick="javascript:delReply(${replyList.reply_num})" data-reply_number="${replyList.reply_num}">삭제</button>			
+			</c:if>	
+	    </div>
+	  </a>
+  </c:forEach>
+</div>
+</div>
+
+
 	<!-- 댓글 작성 영역  -->
 <hr>
 

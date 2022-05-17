@@ -44,20 +44,4 @@ public class RatingController {
 		return String.format("{\"updated\":%b}", updated);
 	}
 
-//	// ========================================= 별점 삭제 
-//	@PostMapping("/delete")
-//	@ResponseBody
-//	public String rating_delete(int rating_num) {
-//		System.out.println("삭제 ");
-//		boolean res = svc.rating_delete(rating_num)>0;
-//		return String.format("{\"deleted\":%b}", res);
-//	}
-
-//	@GetMapping("/delete/{rating_num}")
-//	@ResponseBody
-//	public String userOut(@PathVariable("rating_num") int rating_num) {
-//		System.out.println("삭제 ");
-//		boolean res = svc.rating_delete(rating_num)>0;
-//		return String.format("{\"deleted\":%b}", res);
-//	}
 }

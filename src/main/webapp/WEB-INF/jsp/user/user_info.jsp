@@ -13,32 +13,11 @@
       <!-- Styles -->
       <link href="../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
       <link href="../resources/vendor/animate/animate.css" rel="stylesheet" type="text/css"/>
-      <link href="../resources/css/style.css" rel="stylesheet" type="text/css"/>
+      <link href="../resources/css/info.css" rel="stylesheet" type="text/css"/>
       
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" 
-	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
-	crossorigin="anonymous"></script>
+      
+      
 <script>
-
-function logout() {
-	if(!confirm('로그아웃 하시겠습니까?')) return;
-	$.ajax({
-		url:'/logout',
-		method:'get',
-		dataType:'json',
-		cache:false,
-		success:function(res) {
-			alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
-			if (res.logoutok) {
-				location.href="/main";
-			}
-		},
-		error:function(xhr,status,err) {
-			alert('error:' + err);
-		} 
-	});
-	return false;
-}
 	function user_out() {
 		if(!confirm('탈퇴하시겠습니까?')) return;
 		$.ajax({
@@ -47,7 +26,7 @@ function logout() {
 			dataType:'json',
 			success:function(res) {
 				alert(res.userout ? '탈퇴 성공' : '탈퇴 실패');
-				location.href='/main';
+				location.href='/login';
 			},
 			error:function(xhr,status,err) {
 				alert('error:' + err);
@@ -56,6 +35,35 @@ function logout() {
 		return false;
 	}
 </script>
+
+<script>
+	function logout() {
+		if(!confirm('로그아웃 하시겠습니까?')) return;
+			$.ajax({
+				url:'/logout',
+				method:'get',
+				dataType:'json',
+				cache:false,
+				success:function(res) {
+					alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
+					if (res.logoutok) {
+						location.href="/main";
+					}
+				},
+				error:function(xhr,status,err) {
+					alert('error:' + err);
+				} 
+			});
+		return false;
+	}
+		
+	function search() {
+		var keyword = $('#keyword').val();
+		alert(keyword);
+		location.href = "/board/board_searchList/" + keyword;
+	}
+</script>
+
 </head>
 <body>
 
@@ -64,11 +72,11 @@ function logout() {
          <div class="row justify-content-md-center ">
             <div class="col-md-10 col-sm-12">
                <nav class="navbar navbar-default">
-                  <a class="navbar-brand" href="/main">JOJO</a>
+        	   <a class="navbar-brand" href="/movie/main/${user_id}">JOJO</a>
                   <div class="navbar-welcome">                          
-                	<c:if test="${user_id ne user.user_id}">
-						<a class="nav-link" href="/login">WELCOME! 로그인</a>
-					</c:if>	
+					<c:if test="${user_id eq user.user_id}">
+						<a class="nav-link">WELCOME, ${user_id}!</a>
+					</c:if>
                   </div>
                   <div class="button_container" id="toggle">
                      <span class="black top"></span>
@@ -78,10 +86,10 @@ function logout() {
                   <div class="overlay" id="overlay">
                      <nav class="overlay-menu">
                         <ul>
-							<li> <a href="/movie/movie_list">Ratings</a></li>
-                           	<li> <a href="/board/board_list/1">Board</a></li>
-                           	<li> <a href="/user_info/${user_id}">My page</a></li>
-                           	<li> <a href="javascript:logout();">Logout</a></li>
+                           <li> <a href="/movie/movie_list">Ratings</a></li>
+                           <li> <a href="/board/board_list/1">Board</a></li>
+                           <li> <a href="/user_info/${user_id}">My page</a></li>
+                           <li> <a href="javascript:logout();">Logout</a></li>
                         </ul>
                      </nav>
                   </div>
@@ -101,7 +109,7 @@ function logout() {
                      <br>
                      <p><br>
                      	아이디 : ${user.user_id}
-			<input type="hidden" id="user_pwd" name="user_pwd" value="${user.user_pwd }">
+						<input type="hidden" id="user_pwd" name="user_pwd" value="${user.user_pwd }">
                         <br>
                         이름 : ${user.user_name}
                         <br>
@@ -115,15 +123,46 @@ function logout() {
 						<br>
                      </p>
                      <button type="submit" style="float: left;" onclick="location.href='/user_edit/${user.user_id}'">정보수정</button>
-                     <button type="submit" onclick="location.href='javascript:user_out()'">회원탈퇴</button>
-                  </div>
+                     <button type="submit" onclick="location.href='javascript:user_out()'">회원탈퇴</button><br><br>
+                     </div>
+              
+                     <div class="graph">
+                        <hr>
+                     	<b><font size="6" color="black">개인성향지표</font></b>
+                    	 <br>
+                    	 <br>
+                     		<div class="left_text">배우별 성향</div>
+                     		<div class="middle_text">장르별 성향</div>
+                     		<div class="right_text">감독별 성향</div>
+                     </div>
+                 	<div class="grid-image"><br>
+	  					<img alt="" src="../resources/img/actor.png" style="display" />
+						<img alt="" src="../resources/img/drama.png" />	 
+						<img alt="" src="../resources/img/director.png" />
+					</div>
+					<div class="graph2">
+						<hr>
+						<div class="histogram1">	
+							<b><font size="6" color="black">히스토그램</font></b>
+						</div>
+						<div class="wordcloud1">
+							<b><font size="6" color="black">워드클라우드</font></b>
+						</div>
+						<div class="hisimg">
+							<img alt="" src="../resources/img/histogram.png" />	
+						</div>
+						<div class="wordimg">
+							<img alt="" src="../resources/img/wordcloud.png" />
+						</div>
+					</div>				  
+				  </div>
                </div>
             </div>
          </div>
-      </div>
-      <!-- End Products -->
-		
-		  <!-- Footer -->
+
+	<!-- End Products -->
+
+		  <!--  Footer —>--> 
       <div class="container-fluid footer ">
          <div class="row">
 
@@ -134,8 +173,8 @@ function logout() {
             </div>
          </div>
       </div>
-      <!-- End Footer -->
-      <!-- Javascript -->
+      <!--  End Footer —>--> 
+      <!-- Javascript —> --> 
       <script src="../resources/vendor/jquery.min.js"></script>
       <script src="../resources/vendor/bootstrap/js/bootstrap.min.js"></script>
       <script src="../resources/vendor/wow/wow.js"></script>
@@ -143,6 +182,6 @@ function logout() {
       <script>
          new WOW().init();
       </script>
-      <!-- End Javascript -->
+      <!-- End Javascript —> --> 
 </body>
 </html>

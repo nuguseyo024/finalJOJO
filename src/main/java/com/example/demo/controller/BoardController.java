@@ -51,9 +51,9 @@ public class BoardController {
 		PageInfo<BoardVO> pgInfo = svc.board_getList_page(pg, 10);
 		model.addAttribute("pageInfo", pgInfo);
 
-		return "/board/board_list2";
+		return "/board/board_list";
 	}
-	
+
 	// ========================================= 글 상세 화면 view
 	// http://localhost:8080/board/board_read/7
 	@GetMapping("/board_read/{board_num}")

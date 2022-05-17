@@ -44,6 +44,26 @@ if (session.getAttribute("user_id") != null) {
 		});
 		return false;
 	}
+	function logout() {
+		if(!confirm('로그아웃 하시겠습니까?')) return;
+		$.ajax({
+			url:'/logout',
+			method:'get',
+			dataType:'json',
+			cache:false,
+			success:function(res) {
+				alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
+				if (res.logoutok) {
+					location.href="/login";
+				}
+			},
+			error:function(xhr,status,err) {
+				alert('error:' + err);
+			} 
+		});
+		return false;
+	}
+	
 </script>
 </head>
 <br>

@@ -403,19 +403,19 @@ h2 {
 
 @media (max-width: 991px) {
 	.card-columns {
-		column-count: 1;
+		column-count: 5;
 	}
 }
 
 @media (min-width: 992px) {
 	.card-columns {
-		column-count: 2;
+		column-count: 5;
 	}
 }
 
 @media (min-width: 1200px) {
 	.card-columns {
-		column-count: 3;
+		column-count: 5;
 	}
 }
 

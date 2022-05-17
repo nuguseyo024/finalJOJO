@@ -7,9 +7,10 @@
 	<insert id="rating_insert"
 		parameterType="com.example.demo.vo.RatingVO">
 		INSERT INTO TB_rating
-		VALUES (0, #{user_rating},
-				(SELECT user_num from TB_user WHERE user_id = #{rt_user_id}),
-				#{rt_user_id}, #{mv_code}, now())
+		VALUES ((select * from (select max(rating_num)+1 from TB_rating)as X), 
+				(SELECT user_num from TB_user WHERE user_id = #{rt_user_id}), 
+				#{rt_user_id}, #{movieId}, #{mv_code},
+				#{user_rating} )
 	</insert>
 
 <!-- 유저의 아이디와 영화 코드를 가지고 그 영화의 별점을 가져오는 구문  -->

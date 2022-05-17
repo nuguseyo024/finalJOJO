@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% String user_id = (String)session.getAttribute("user_id"); %>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
    <head>
@@ -17,7 +18,7 @@
             success:function(res) {
                alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
                if (res.logoutok) {
-                  location.href="/main";
+                  location.href="/login";
                }
             },
             error:function(xhr,status,err) {
@@ -46,9 +47,9 @@
       <meta name="author" content="Nicola Tolin">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <!-- Styles -->
-      <link href="../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-      <link href="../resources/vendor/animate/animate.css" rel="stylesheet" type="text/css"/>
-      <link href="../resources/css/style.css" rel="stylesheet" type="text/css"/>
+      <link href="/../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+      <link href="/../resources/vendor/animate/animate.css" rel="stylesheet" type="text/css"/>
+      <link href="/../resources/css/style.css" rel="stylesheet" type="text/css"/>
    </head>
    <body>
       <!-- Navbar -->
@@ -56,7 +57,7 @@
          <div class="row justify-content-md-center ">
             <div class="col-md-10 col-sm-12">
                <nav class="navbar navbar-default">
-                  <a class="navbar-brand" href="/main">JOJO</a>
+                  <a class="navbar-brand" href="/movie/main/${user_id}">JOJO</a>
                   <div class="navbar-welcome">                          
                    <c:if test="${user_id == null}">
                   <a class="nav-link" href="/login">WELCOME! 로그인</a>
@@ -74,14 +75,15 @@
                      <nav class="overlay-menu">
                         <ul>
                            <c:if test="${user_id == null}">
+                              <li> <a href="/movie/movie_list">Ratings</a></li>
                         <li> <a href="/board/board_list/1">Board</a></li>
                         <li> <a href="javascript:toLogin();">My page</a></li>
                      </c:if>
                         </ul>
                         <ul>
                            <c:if test="${user_id != null}">
-                       		   <li> <a href="/movie/movie_list">Ratings</a></li>
-                  				<li> <a href="/board/board_list/1">Board</a></li>
+                              <li> <a href="/movie/movie_list">Ratings</a></li>
+                        <li> <a href="/board/board_list/1">Board</a></li>
                                <li> <a href="/user_info/${user_id}">My page</a></li>
                                <li> <a href="javascript:logout();">Logout</a></li>
                      </c:if>
@@ -116,21 +118,21 @@
             <div class="row justify-content-md-center ">
                <div class="col-md-10 col-sm-12">
                   <div class="card-columns">
-                 <c:forEach var="main_movie" items="${main_movie }"> 
+                  <c:forEach var="main_movie1" items="${main_movie1 }">
                   <!--  이게 반복됨  -->
                      <div class="card card-hover h-100" >
                         <div class="card-body">
-                           <a href="index.html">
-                              <img class="card-img-top" src="https://movie.naver.com/movie/bi/mi/photoViewPopup.naver?movieCode=182016" alt="Card image cap">
-                              <div class="reveal h-100 p-2 d-flex ">
-                                 <div class="w-100 align-self-center">
-                                    <p>+</p>
+                           <a href="/movie/movie_read/${main_movie1.rec_mv_id}?mv_code=${main_movie1.rec_mv_id}&rt_user_id=${user_id}">
+                              <img class="card-img-top" src="${main_movie1.poster_url }" alt="Card image cap">
+                                 <div class="reveal h-100 p-2 d-flex ">
+                                    <div class="w-100 align-self-center">
+                                       <p>+</p>
                                  </div>
                               </div>
                            </a>
                         </div>
                      </div>
-                  </c:forEach>          
+                   </c:forEach>    
                   </div>
                </div>
             </div>
@@ -152,12 +154,12 @@
             <div class="row justify-content-md-center ">
                <div class="col-md-10 col-sm-12">
                   <div class="card-columns">
-                 <!--  <c:forEach var="movie" items="${movie }">     -->       
+                 <c:forEach var="main_movie2" items="${main_movie2 }">        
                   <!--  이게 반복됨  -->
                      <div class="card card-hover h-100" >
                         <div class="card-body">
-                           <a href="index.html">
-                              <img class="card-img-top" src="https://movie.naver.com/movie/bi/mi/photoViewPopup.naver?movieCode=182016" alt="Card image cap">
+                           <a href="/movie/movie_read/${main_movie2.rec_mv_id}?mv_code=${main_movie2.rec_mv_id}&rt_user_id=${user_id}">
+                              <img class="card-img-top" src="${main_movie2.poster_url }" alt="Card image cap">
                               <div class="reveal h-100 p-2 d-flex ">
                                  <div class="w-100 align-self-center">
                                     <p>+</p>
@@ -166,7 +168,7 @@
                            </a>
                         </div>
                      </div>
-                 <!-- </c:forEach>      -->                 
+                 </c:forEach>               
                   </div>
                </div>
             </div>
@@ -189,12 +191,12 @@
             <div class="row justify-content-md-center ">
                <div class="col-md-10 col-sm-12">
                   <div class="card-columns">
-                 <!--  <c:forEach var="movie" items="${movie }">     -->       
+                 <c:forEach var="main_movie3" items="${main_movie3 }">    
                   <!--  이게 반복됨  -->
                      <div class="card card-hover h-100" >
                         <div class="card-body">
-                           <a href="index.html">
-                              <img class="card-img-top" src="https://movie.naver.com/movie/bi/mi/photoViewPopup.naver?movieCode=182016" alt="Card image cap">
+                           <a href="/movie/movie_read/${main_movie3.rec_mv_id}?mv_code=${main_movie3.rec_mv_id}&rt_user_id=${user_id}">
+                              <img class="card-img-top" src="${main_movie3.poster_url }" alt="Card image cap">
                               <div class="reveal h-100 p-2 d-flex ">
                                  <div class="w-100 align-self-center">
                                     <p>+</p>
@@ -203,7 +205,7 @@
                            </a>
                         </div>
                      </div>
-                 <!-- </c:forEach>      -->                 
+                  </c:forEach>                 
                   </div>
                </div>
             </div>
@@ -226,12 +228,12 @@
             <div class="row justify-content-md-center ">
                <div class="col-md-10 col-sm-12">
                   <div class="card-columns">
-                 <!--  <c:forEach var="movie" items="${movie }">     -->       
+                <c:forEach var="main_movie4" items="${main_movie4 }">  
                   <!--  이게 반복됨  -->
                      <div class="card card-hover h-100" >
                         <div class="card-body">
-                           <a href="index.html">
-                              <img class="card-img-top" src="https://movie.naver.com/movie/bi/mi/photoViewPopup.naver?movieCode=182016" alt="Card image cap">
+                           <a href="/movie/movie_read/${main_movie4.rec_mv_id}?mv_code=${main_movie4.rec_mv_id}&rt_user_id=${user_id}">
+                              <img class="card-img-top" src="${main_movie4.poster_url }" alt="Card image cap">
                               <div class="reveal h-100 p-2 d-flex ">
                                  <div class="w-100 align-self-center">
                                     <p>+</p>
@@ -240,7 +242,7 @@
                            </a>
                         </div>
                      </div>
-                 <!-- </c:forEach>      -->                 
+                 </c:forEach> 
                   </div>
                </div>
             </div>
@@ -263,12 +265,12 @@
             <div class="row justify-content-md-center ">
                <div class="col-md-10 col-sm-12">
                   <div class="card-columns">
-                 <!--  <c:forEach var="movie" items="${movie }">     -->       
+                 <c:forEach var="main_movie5" items="${main_movie5 }">     
                   <!--  이게 반복됨  -->
                      <div class="card card-hover h-100" >
                         <div class="card-body">
-                           <a href="index.html">
-                              <img class="card-img-top" src="https://movie.naver.com/movie/bi/mi/photoViewPopup.naver?movieCode=182016" alt="Card image cap">
+                           <a href="/movie/movie_read/${main_movie5.rec_mv_id}?mv_code=${main_movie5.rec_mv_id}&rt_user_id=${user_id}">
+                              <img class="card-img-top" src="${main_movie5.poster_url }" alt="Card image cap">
                               <div class="reveal h-100 p-2 d-flex ">
                                  <div class="w-100 align-self-center">
                                     <p>+</p>
@@ -277,7 +279,7 @@
                            </a>
                         </div>
                      </div>
-                 <!-- </c:forEach>      -->                 
+                 </c:forEach>              
                   </div>
                </div>
             </div>
@@ -297,10 +299,10 @@
       </div>
       <!-- End Footer -->
       <!-- Javascript -->
-      <script src="../resources/vendor/jquery.min.js"></script>
-      <script src="../resources/vendor/bootstrap/js/bootstrap.min.js"></script>
-      <script src="../resources/vendor/wow/wow.js"></script>
-      <script src="../resources/js/script.js"></script>
+      <script src="/../resources/vendor/jquery.min.js"></script>
+      <script src="/../resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+      <script src="/../resources/vendor/wow/wow.js"></script>
+      <script src="/../resources/js/script.js"></script>
       <script>
          new WOW().init();
       </script>

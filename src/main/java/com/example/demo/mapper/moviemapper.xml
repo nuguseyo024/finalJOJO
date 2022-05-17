@@ -20,7 +20,7 @@
 		resultType="com.example.demo.vo.MovieVO" parameterType="String">
 		SELECT * FROM
 		TB_movie
-		WHERE title_kr LIKE CONCAT('%',#{keyword},'%')
+		WHERE title_kor LIKE CONCAT('%',#{keyword},'%')
 		OR 	  title_eng LIKE CONCAT('%',#{keyword},'%')
 		OR 	  director LIKE CONCAT('%',#{keyword},'%')
 		OR 	  directors_kor LIKE CONCAT('%',#{keyword},'%')
@@ -29,5 +29,16 @@
 		ORDER BY naver_user_rate desc
 	</select>
 
+
+	<!-- 메인페이지 영화 추천 -->
+   <select id="main_recommend" 
+      resultType="com.example.demo.vo.RecommendVO"
+      parameterType="String">
+      SELECT * FROM recommend_movies 
+      WHERE userID = (
+         SELECT user_num FROM tb_user WHERE user_id = #{user_id})
+      AND section = #{section}
+         
+   </select>
 </mapper>
 	

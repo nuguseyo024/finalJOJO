@@ -39,7 +39,7 @@
 			success : function(res) {
 				alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
 				if (res.logoutok) {
-					location.href = "/main";
+					location.href = "/login";
 				}
 			},
 			error : function(xhr, status, err) {
@@ -101,11 +101,11 @@
 				<form id="update_form">
 					<strong> &starf;별점을 매겨보세요!&starf; </strong><br> 
 					<input type="hidden" id="rating_num" name="rating_num" value="${rating.rating_num }" > 
-				 		 <input style="width: 500px;" type="range" id="user_rating" name="user_rating" min="0.5" max="5" step="0.5" value="${rating.user_rating }" oninput="document.getElementById('value1').innerHTML=this.value;">
+				 		 <input style="width: 500px;" type="range" id="user_rating" name="user_rating" min="0.5" max="10" step="0.5" value="${rating.user_rating }" oninput="document.getElementById('value1').innerHTML=this.value;">
 				 		  <strong><span id="value1"></span><br></strong>
 				 		 <input type="hidden" id="rt_user_id" name="rt_user_id" value="${user_id}"> 
 				 		 <input type="hidden" id="mv_code" name="mv_code" value="${rating.mv_code}"> 
-				 		 <input type="hidden" id="rating_date" name="rating_date" value="${rating.rating_date }">  
+				 		 
 			    		  <button type="button" onclick="updateAction();" class="btn btn-outline-primary btn-sm"> 확인  </button>
 			
 				</form>

@@ -17,36 +17,48 @@
       <link href="../resources/css/style.css" rel="stylesheet" type="text/css"/>
       
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
-	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
-	crossorigin="anonymous"></script>
+   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+   crossorigin="anonymous"></script>
 <script>
-	function user_edit() {
-		var serData = $('#user_edit').serialize();
+   function user_edit() {
+      var serData = $('#user_edit').serialize();
+      $.ajax({
+         url:'/user_update',
+         method:'post',
+         cache:false,
+         data:serData,
+         dataType:'json',
+         success:function(res) {
+            alert(res.userupdated ? '수정 성공' : '수정 실패');
+            location.href='/user_info/${user_id}';
+         },
+         error:function(xhr,status,err) {
+            alert('error:' + err);
+         }
+      });
+      return false;
+   }
+   
+	function logout() {
+		if (!confirm('로그아웃 하시겠습니까?'))
+			return;
 		$.ajax({
-			url:'/user_update',
-			method:'post',
-			cache:false,
-			data:serData,
-			dataType:'json',
-			success:function(res) {
-				alert(res.userupdated ? '수정 성공' : '수정 실패');
-				location.href='/user_info/${user_id}';
+			url : '/logout',
+			method : 'get',
+			dataType : 'json',
+			cache : false,
+			success : function(res) {
+				alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
+				if (res.logoutok) {
+					location.href = "/login";
+				}
 			},
-			error:function(xhr,status,err) {
+			error : function(xhr, status, err) {
 				alert('error:' + err);
 			}
 		});
 		return false;
 	}
-	
-	// 비밀번호 수정 전 현재 비밀번호 확인 팝업
-	function moveToPopup() {
-		var url = "/user_chkpwd_popup/${user.user_id}";  // 팝업창으로 열고 싶은 페이지 URL
-		var name = "popuptest";  // 팝업창 이름
-		var option = "width = 600, height = 200"  // 팝업창 옵션
-		window.open(url, name, option);
-	}
-
 </script> 
 </head>
 <body>
@@ -56,14 +68,14 @@
          <div class="row justify-content-md-center ">
             <div class="col-md-10 col-sm-12">
                <nav class="navbar navbar-default">
-                  <a class="navbar-brand" href="/main">JOJO</a>
+                 <a class="navbar-brand" href="/movie/main/${user_id}">JOJO</a>
                   <div class="navbar-welcome">                          
-                	<c:if test="${user_id ne user.user_id}">
-						<a class="nav-link" href="/login">WELCOME! 로그인</a>
-					</c:if>	
-					<c:if test="${user_id eq user.user_id}">
-						<a class="nav-link">WELCOME, ${user_id}!</a>
-					</c:if>
+                   <c:if test="${user_id ne user.user_id}">
+                  <a class="nav-link" href="/login">WELCOME! 로그인</a>
+               </c:if>   
+               <c:if test="${user_id eq user.user_id}">
+                  <a class="nav-link">WELCOME, ${user_id}!</a>
+               </c:if>
                   </div>
                   <div class="button_container" id="toggle">
                      <span class="black top"></span>
@@ -73,10 +85,10 @@
                   <div class="overlay" id="overlay">
                      <nav class="overlay-menu">
                         <ul>
-							<li> <a href="/movie/movie_list">Ratings</a></li>
-                           	<li> <a href="/board/board_list/1">Board</a></li>
-                           	<li> <a href="/user_info/${user_id}">My page</a></li>
-                           	<li> <a href="javascript:logout();">Logout</a></li>
+                           <li> <a href="/movie/movie_list">Ratings</a></li>
+                           <li> <a href="/board/board_list/1">Board</a></li>
+                           <li> <a href="/user_info/${user_id}">My page</a></li>
+                           <li> <a href="javascript:logout();">Logout</a></li>
                         </ul>
                      </nav>
                   </div>
@@ -85,7 +97,7 @@
          </div>
       </div>
       <!-- End Navbar -->
-		 <!-- Products -->
+       <!-- Products -->
       <div class="container-fluid contact-form">
          <div class="row">
             <div class="col-md-10 offset-md-1">
@@ -95,40 +107,40 @@
                         <div class="row">
                            <div class="col-md-12">
                               <div class="md-form form-group">
-                     			<b><font size="6" color="black">가입정보수정</font></b>
-                   			  		<br>
-                     				<br>
-                     				아이디 : ${user.user_id} 
-                     				<input type="hidden" id="user_id" name="user_id" value="${user.user_id }">
-			                        <br>
-			                        비밀번호 : 
-			                        <input type="password" id="user_pwd" name="user_pwd" value="${user.user_pwd }"><button type="button" onclick="moveToPopup();">수정</button>
-			                        <br>
-			                        이름 : ${user.user_name} 
-			                        <input type="hidden" id="user_name" name="user_name" value="${user.user_name }" >
-			                        <br>
-			                        전화번호 :<input type="text" id="user_phone" name="user_phone" class="form-control" value="${user.user_phone}" required>
-			                        <br>
-									이메일 :<input type="text" id="user_email" name="user_email" class="form-control" value="${user.user_email}" required>
-									<br>
-									성별 : ${user.user_sex}
-									<br>
-									생년월일 : ${user.user_birth}
-									<br>
-                     				<button type="submit">수정하기</button>
-                  			</div>
-               			</div>
-            		</div>
-				</form>
-         	</div>
-      	</div>
+                              <b><font size="6" color="black">가입정보수정</font></b>
+                                    <br>
+                                 <br>
+                                 아이디 : ${user.user_id} 
+                                 <input type="hidden" id="user_id" name="user_id" value="${user.user_id }">
+                                 <br>
+                                 비밀번호 : 
+                                 <input type="password" id="user_pwd" name="user_pwd" value="${user.user_pwd }"><button type="button" onclick="location.href='/user_chgpwd/${user.user_id}';">수정</button>
+                                 <br>
+                                 이름 : ${user.user_name} 
+                                 <input type="hidden" id="user_name" name="user_name" value="${user.user_name }" >
+                                 <br>
+                                 전화번호 :<input type="text" id="user_phone" name="user_phone" class="form-control" value="${user.user_phone}" required>
+                                 <br>
+                           이메일 :<input type="text" id="user_email" name="user_email" class="form-control" value="${user.user_email}" required>
+                           <br>
+                           성별 : ${user.user_sex}
+                           <br>
+                           생년월일 : ${user.user_birth}
+                           <br>
+                                 <button type="submit">수정하기</button>
+                           </div>
+                        </div>
+                  </div>
+            </form>
+            </div>
+         </div>
       </div>
      </div>
     </div>
       <!-- End Products -->
-		
-		
-		  <!-- Footer -->
+      
+      
+        <!-- Footer -->
       <div class="container-fluid footer ">
          <div class="row">
             <div class="col-xl-2 col-md-8 offset-md-1 col-sm-12">
