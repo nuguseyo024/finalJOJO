@@ -63,7 +63,7 @@
     function openPopup() {
        var popUrl = "/user_chkpwd_popup/${user.user_id}";
        var popName = "chkPassword"
-       var popOption = "top = 300, left = 500, width = 700, height = 300";
+       var popOption = "top = 200, left = 500, width = 700, height = 500";
        window.open(popUrl, popName, popOption);
     }
    

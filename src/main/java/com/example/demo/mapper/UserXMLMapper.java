@@ -15,4 +15,5 @@ public interface UserXMLMapper {
    boolean userOut(String user_id);  // 회원 탈퇴
    UserVO userChgPwd(String user_id);  // 비밀번호 변경 페이지
    boolean userChgPwdProcess(UserVO userVO);  // 비밀번호 변경 기능
+   int idChk(UserVO userVO);  // 아이디 중복 체크
 }

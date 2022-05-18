@@ -66,6 +66,7 @@
                   <div class="overlay" id="overlay">
                      <nav class="overlay-menu">
                         <ul>
+                           <li> <a href="/movie/movie_list">Ratings</a></li>
                            <li> <a href="/board/board_list/1">Board</a></li>
                            <li> <a href="/user_info/${user_id}">My page</a></li>
                            <li> <a href="javascript:logout();">Logout</a></li>
@@ -104,7 +105,7 @@
                   <!--  이게 반복됨  -->
                      <div class="card card-hover h-100" >
                         <div class="card-body">
-                           <a href="/movie/movie_read/${movie.code}">
+                           <a href="/movie/movie_read/${movie.code}?mv_code=${movie.code}&rt_user_id=${user_id}">
                               <img class="card-img-top" src="${movie.poster_url }" alt="Card image cap">
                               <div class="reveal h-100 p-2 d-flex ">
                                  <div class="w-100 align-self-center">

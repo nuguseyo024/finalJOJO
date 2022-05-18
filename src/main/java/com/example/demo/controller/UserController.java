@@ -87,11 +87,25 @@ public class UserController {
       return "/user/user_join";
    }
    
+   
+//   // 회원가입 기능
+//   @PostMapping("/join")
+//   @ResponseBody
+//   public String joinProcess(UserVO userVO) {
+//      return String.format("{\"joined\":%b}", userSvc.join(userVO));
+//   }
+   
    // 회원가입 기능
    @PostMapping("/join")
    @ResponseBody
    public String joinProcess(UserVO userVO) {
-      return String.format("{\"joined\":%b}", userSvc.join(userVO));
+      int result = userSvc.idChk(userVO);
+      if (result == 1) {  // result == 1 : 아이디 중복 -> 다시 user_join으로 보냄
+         return "/user/user_join";
+      } else {  // result == 0 : 아이디 중복 없음 -> 회원가입 완료
+         return String.format("{\"joined\":%b}", userSvc.join(userVO));
+      }
+      
    }
    
    // 로그인 기능
@@ -163,6 +177,15 @@ public class UserController {
    public String userChgPwdProcess(UserVO userVO) {
       boolean chgpwdok = userSvc.userChgPwdProcess(userVO);
       return String.format("{\"chgpwdok\":%b}", chgpwdok);
+   }
+   
+   // 아이디 중복 체크
+   @PostMapping("/idChk")
+   @ResponseBody
+   public int idChk(UserVO userVO) {
+      System.out.println("idchk");
+      int result = userSvc.idChk(userVO);
+      return result;
    }
 
    

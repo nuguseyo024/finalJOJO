@@ -2,7 +2,7 @@
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
+
  <title>Log In</title>
         <meta charset="utf-8">
         <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
@@ -13,26 +13,27 @@
         <script>
          
         function login() {
-            var user_id = $('#user_id').val();
-            var serData = $('#login_form').serialize();
-            $.ajax({
-               url:'/login',
-               method:'post',
-               cache:false,
-               data:serData,
-               dataType:'json',
-               success:function(res) {
-                  alert(res.loginsuccess ? '로그인 성공' : '로그인 실패');
-                  if (res.loginsuccess == true) {
-                     location.href = '/movie/main/' + user_id;
-                  }
-               },
-               error:function(xhr,status,err) {
-                  alert('error:' + err);
-               }
-            });
-            return false;
-         }
+           var user_id = $('#user_id').val();
+           var serData = $('#login_form').serialize();
+           $.ajax({
+              url:'/login',
+              method:'post',
+              cache:false,
+              data:serData,
+              dataType:'json',
+              success:function(res) {
+                 alert(res.loginsuccess ? '로그인 성공' : '로그인 실패');
+                 if (res.loginsuccess == true) {
+                    location.href = '/movie/main/' + user_id;
+                 }
+              },
+              error:function(xhr,status,err) {
+                 alert('error:' + err);
+              }
+           });
+           return false;
+        }
+        
         </script>
     </head>
     <body>

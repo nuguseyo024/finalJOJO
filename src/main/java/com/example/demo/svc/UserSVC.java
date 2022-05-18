@@ -71,5 +71,11 @@ public class UserSVC {
       return userDao.userChgPwdProcess(userVO);
    }
    
+   // 아이디 중복 체크
+   public int idChk(UserVO userVO) {
+      int result = userDao.idChk(userVO);
+      return result;
+   }
+
    
 }

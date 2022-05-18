@@ -47,7 +47,7 @@
 				success:function(res) {
 					alert(res.logoutok ? '로그아웃 성공' : '로그아웃 실패');
 					if (res.logoutok) {
-						location.href="/main";
+						location.href="/login";
 					}
 				},
 				error:function(xhr,status,err) {

@@ -67,6 +67,13 @@
       WHERE user_id = #{user_id}
    </update>
    
+   <!-- 아이디 중복 체크 -->
+   <select id="idChk" resultType="int"
+      parameterType="com.example.demo.vo.UserVO">
+      SELECT COUNT(*) FROM TB_user
+      WHERE user_id = #{user_id}
+   </select>
+   
    
 
 

@@ -15,7 +15,6 @@ public class UserDAO {
    
    @Autowired SqlSession sql;
    
-   private static final String namespace = "com.example.demo.mapper.UserXMLMapper";
    
    // 회원가입
    public int join(UserVO userVO) {
@@ -53,6 +52,13 @@ public class UserDAO {
       return userMapper.userChgPwdProcess(userVO);
    }
    
+   // 아이디 중복 체크
+   public int idChk(UserVO userVO) {
+      int result = userMapper.idChk(userVO);
+      return result;
+   }
+   
+
    
 
 }

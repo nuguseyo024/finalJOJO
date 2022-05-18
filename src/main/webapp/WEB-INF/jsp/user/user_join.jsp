@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-	<title>회원가입</title>
+   <title>회원가입</title>
       <meta charset="UTF-8">
       <meta name="description" content="Free HTML template">
       <meta name="keywords" content="HTML, template, free">
@@ -18,55 +18,68 @@
 
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
-	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
-	crossorigin="anonymous"></script>
+   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+   crossorigin="anonymous"></script>
 <script>
 
-	function join() { 
-		var serData = $('#join_form').serialize();
-		$.ajax({
-			url:'/join',
-			method:'post',
-			cache:false,
-			data:serData,
-			dataType:'json',
-			success:function(res) {
-				alert(res.joined ? '회원가입 성공' : '회원가입 실패');
-				if (res.joined == true) {
-					alert('로그인 페이지로 이동합니다!')
-					location.href = '/login';
-				}
-			},
-			error:function(xhr,status,err) {
-				alert('error?' + err);
-			}
-		});
-		return false;
-	}
-	
-	
-	// 아이디 중복 체크
-	function idChk() {
-		var user_id = $('#user_id').val();
-		$.ajax({
-			url:'/idChk',
-			type:'post',
-			data:{user_id:user_id},
-			success:function(cnt) {
-				if (cnt != 1) {  // cnt == 0 사용가능 아이디
-					alert('사용 가능한 아이디입니다.');
-				} else {  // cnt == 1 : 이미 존재하는 아이디
-					alert('이미 사용중인 아이디입니다.');
-					idck = 1;
-				}
-			}, 
-			error:function() {
-				alert('error');
-			}
-		});
-	}
-			
-	
+   
+   $(document).ready(function(){
+      
+      $("#submit").on("click", function(){
+         var idChkVal = $("#idChk").val();
+         if(idChkVal == "N"){
+            alert("중복확인 버튼을 눌러주세요.");
+         }else if(idChkVal == "Y"){
+            return join();
+         }
+      });
+   })
+
+   function join() { 
+      
+      var serData = $('#join_form').serialize();
+      $.ajax({
+         url:'/join',
+         method:'post',
+         cache:false,
+         data:serData,
+         dataType:'json',
+         success:function(res) {
+            alert(res.joined ? '회원가입 성공' : '회원가입 실패');
+            if (res.joined == true) {
+               alert('로그인 페이지로 이동합니다!')
+               location.href = '/login';
+            }
+         },
+         error:function(xhr,status,err) {
+            console.log('error?' + err);
+         }
+      });
+      return false;
+   }
+   
+   
+   function fn_idChk() {
+      var user_id = $('#user_id').val();
+      var data = {'user_id' : user_id};
+      
+      $.ajax({
+         url:'/idChk',
+         type:'post',
+         dataType:'json',
+         data:data,
+         success:function(res) {
+            if (res == 1) {
+               alert('중복된 아이디입니다. 다른 아이디를 사용해주세요.');
+            } else if (res == 0) {
+               $('#idChk').attr('value', 'Y');
+               alert('사용가능한 아이디입니다.');
+            }
+         }
+      });
+   }
+         
+   
 </script>
 </head>
 <body>
@@ -79,12 +92,12 @@
                <nav class="navbar navbar-default">
                   <a class="navbar-brand" href="/movie/main/${user_id}">JOJO</a>
                   <div class="navbar-welcome">                          
-                	<c:if test="${user_id ne user.user_id}">
-						<a class="nav-link" href="/login">WELCOME! 로그인</a>
-					</c:if>	
-					<c:if test="${user_id eq user.user_id}">
-						<a class="nav-link">WELCOME, ${user_id}!</a>
-					</c:if>
+                   <c:if test="${user_id ne user.user_id}">
+                  <a class="nav-link" href="/login">WELCOME! 로그인</a>
+               </c:if>   
+               <c:if test="${user_id eq user.user_id}">
+                  <a class="nav-link">WELCOME, ${user_id}!</a>
+               </c:if>
                   </div>
                   <div class="button_container" id="toggle">
                      <span class="black top"></span>
@@ -93,11 +106,11 @@
                   </div>
                   <div class="overlay" id="overlay">
                      <nav class="overlay-menu">
-                       <ul>
-							<li> <a href="/movie/movie_list">Ratings</a></li>
-                           	<li> <a href="/board/board_list/1">Board</a></li>
-                           	<li> <a href="/user_info/${user_id}">My page</a></li>
-                           	<li> <a href="javascript:logout();">Logout</a></li>
+                        <ul>
+                           <li> <a href="/movie/movie_list">Ratings</a></li>
+                           <li> <a href="/board/board_list/1">Board</a></li>
+                           <li> <a href="/user_info/${user_id}">My page</a></li>
+                           <li> <a href="javascript:logout();">Logout</a></li>
                         </ul>
                      </nav>
                   </div>
@@ -116,33 +129,34 @@
                         <div class="row">
                            <div class="col-md-12">
                               <div class="md-form form-group">
-                     			<b><font size="6" color="black">회원가입</font></b>
-                   			  		<br>
-                     				<br>
-                     				아이디 :<input type="text" id="user_id" name="user_id" class="form-control">
-									<button type="button" onclick="idChk();">중복확인</button>
-			                        <br>
-			                        비밀번호 :<input type="password" id="user_pwd" name="user_pwd" class="form-control">
-			                        <br>
-			                        이름 :<input type="text" id="user_name" name="user_name" class="form-control">
-			                        <br>
-			                        전화번호 :<input type="text" id="user_phone" name="user_phone" class="form-control">
-			                        <br>
-									이메일 :<input type="email" id="user_email" name="user_email" class="form-control" >
-									<br>
-									성별 : 남성<input type="radio" id="user_sex" name="user_sex" value="M" required>여성<input type="radio" id="user_sex" name="user_sex" value="F">
-									<br>
-									생년월일 :<input type="date" id="user_birth" name="user_birth" required>
-									<br>
-                     				<button type="submit">회원가입</button>
-                     				<button type="reset">초기화</button>
-							</div>
-						</div>
-					</div>
-   				</form>
-   			</div>
-   		</div>
-   	</div>
+                              <b><font size="6" color="black">회원가입</font></b>
+                                    <br>
+                                 <br>
+                                 아이디 :<input type="text" id="user_id" name="user_id" class="form-control">
+                           <button type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button>
+                                 <br>
+                                 비밀번호 :<input type="password" id="user_pwd" name="user_pwd" class="form-control">
+                                 <br>
+                                 이름 :<input type="text" id="user_name" name="user_name" class="form-control">
+                                 <br>
+                                 전화번호 :<input type="text" id="user_phone" name="user_phone" class="form-control">
+                                 <br>
+                           이메일 :<input type="email" id="user_email" name="user_email" class="form-control" >
+                           <br>
+                           성별 : 남성<input type="radio" id="user_sex" name="user_sex" value="M">여성<input type="radio" id="user_sex" name="user_sex" value="F">
+                           <br>
+                           생년월일 :<input type="date" id="user_birth" name="user_birth" required>
+                           <br>
+                                 <button type="submit" id="submit">회원가입</button>
+                                 <button type="reset">초기화</button>
+                                 <button type="button" onclick="location.href='/login';">로그인</button>
+                     </div>
+                  </div>
+               </div>
+               </form>
+            </div>
+         </div>
+      </div>
   </div>
   </div>
       <!-- Footer -->
